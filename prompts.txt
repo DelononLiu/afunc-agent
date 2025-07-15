@@ -1,9 +1,11 @@
 ## Iteration 2
 
-- 比 Iteration 1 流程精简。 如下文档待解决以及改进点：
-子任务划分不稳定
-不会更新 Tasks 状态
-漏Makefile
+模型：qwen3-32b
+效果：比 Iteration 1 流程精简。
+问题：
+- 子任务划分不稳定
+- 任务漏Makefile
+- 不会更新 Tasks 状态
 
 ### PM
 
@@ -20,15 +22,17 @@ USER>>> 用户故事： 角色: 开发者, 操作: 创建 add 算子API, 好处:
 输出到文件：docs/stories/001.001.add-api.md
 
 验收标准：
-函数名为 add，接受两个 int 类型参数。
-返回值为 int，等于两个参数的和。
-不使用 vector 或其他容器。
-代码符合 C++11 标准。
-不使用异常。
-必须使用 TDD（Test-Driven Development）开发流程
-测试框架使用 doctest
-设计函数接口 任务只能编写头文件
-Architect
+- 函数名为 add，接受两个 int 类型参数。
+- 返回值为 int，等于两个参数的和。
+- 不使用 vector 或其他容器。
+- 代码符合 C++11 标准。
+- 不使用异常。
+- 必须使用 TDD（Test-Driven Development）开发流程
+- 测试框架使用 doctest
+- 设计函数接口 任务只能编写头文件
+
+
+### Architect
 
 /architect
 
@@ -39,19 +43,23 @@ USER>>> 请基于 用户故事 docs/stories/001.001.add-api.md 和模板 .bmad-c
 *create-doc .bmad-core/templates/function-tmpl.md
 
 补充要求：
-算子头文件名 add.h 算子实现文件名 add.cpp 算子测试用例文件名 test_add.cpp
-头文件查找目录 include、源码目录 src、测试用例目录 tests
-使用make工具
-使用doctest框架，这是一个header only库
+- 算子头文件名 add.h 算子实现文件名 add.cpp 算子测试用例文件名 test_add.cpp
+- 头文件查找目录 include、源码目录 src、测试用例目录 tests
+- 使用make工具
+- 使用doctest框架，这是一个header only库
+
 开发注意：
-doctest的使用需在其中一个 test_xx.cpp 测试文件中增加 DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 宏定义，如下代码：
+- doctest的使用需在其中一个 test_xx.cpp 测试文件中增加 DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 宏定义，如下代码：
+  ```c++
+  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+  #include "doctest.h" 
+  ```
+  注意： DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN Must Before doctest.h
+- CRITICAL 代码中禁止使用 INT_MIN - 1 或 INT_MAX + 1 表达式，需使用类型转换如 static_cast<long long>(INT_MAX) + 1
+- overflow用例测试参考，如：CHECK(some_func(INT_MAX, 1) == INT_MIN);
 
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include "doctest.h" 
 
- 注意： DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN Must Before doctest.h
-CRITICAL 代码中禁止使用 INT_MIN - 1 或 INT_MAX + 1 表达式，需使用类型转换如 static_cast<long long>(INT_MAX) + 1
-overflow用例测试参考，如：CHECK(some_func(INT_MAX, 1) == INT_MIN);
-Dev
+### Dev
 
 /dev
 
@@ -60,5 +68,6 @@ USER>>> 首先加载 .bmad-core/agents/dev.md 文件，以初始化当前模式�
 USER>>> 请基于用户故事文档 docs/stories/001.001.add-api.md 进行开发；并遵循架构文档 docs/docs/architect.md 中的技术约束。
 
 严格遵循 用户故事文档 中的 Tasks/Subtasks 进行有序开发；每完成一个任务或子任务，必须更新任务状态
+
 
 USER>>> 检查用户故事文档中 Tasks 状态是否更新了
