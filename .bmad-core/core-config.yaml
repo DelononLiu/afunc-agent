@@ -12,10 +12,7 @@ architecture:
   architectureSharded: true
   architectureShardedLocation: docs/architecture
 customTechnicalDocuments: null
-devLoadAlwaysFiles:
-  - docs/architecture/coding-standards.md
-  - docs/architecture/tech-stack.md
-  - docs/architecture/source-tree.md
+devLoadAlwaysFiles: null
 devDebugLog: .ai/debug-log.md
 devStoryLocation: docs/stories
 workflow:
