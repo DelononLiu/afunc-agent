@@ -1,27 +1,37 @@
-#include <assert.h>
 #include "add.h"
+#include <assert.h>
+#include <limits.h>
+
+void test_add_positive_numbers() {
+    assert(add(3, 5) == 8);
+}
+
+void test_add_negative_and_positive() {
+    assert(add(-2, 4) == 2);
+}
+
+void test_add_zero_and_zero() {
+    assert(add(0, 0) == 0);
+}
+
+void test_add_minimum_value() {
+    assert(add(INT_MIN, 0) == INT_MIN);
+}
+
+void test_add_maximum_value() {
+    assert(add(INT_MAX, 0) == INT_MAX);
+}
+
+void test_add_negative_numbers() {
+    assert(add(-10, -5) == -15);
+}
 
 int main() {
-    // 正数+正数
-    assert(add(2, 3) == 5);
-    assert(add(100, 200) == 300);
-    
-    // 负数+负数
-    assert(add(-1, -1) == -2);
-    assert(add(-100, -200) == -300);
-    
-    // 正数+负数
-    assert(add(-1, 1) == 0);
-    assert(add(100, -50) == 50);
-    
-    // 零+零
-    assert(add(0, 0) == 0);
-    
-    // 零+正数
-    assert(add(0, 5) == 5);
-    
-    // 零+负数
-    assert(add(0, -5) == -5);
-    
+    test_add_positive_numbers();
+    test_add_negative_and_positive();
+    test_add_zero_and_zero();
+    test_add_minimum_value();
+    test_add_maximum_value();
+    test_add_negative_numbers();
     return 0;
 }

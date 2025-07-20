@@ -1,5 +1,9 @@
+## 技巧
+- 直接@文件，文件内容更聚焦和精准
+
+
 ## Iteration 5
-增加 ai-coding-workflow.md
+模型：deepseek-v3、qwen3-32b
 
 ### 0、模板准备
 AI协作，生成了：
