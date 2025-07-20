@@ -146,25 +146,23 @@ so that 实现基本的加法功能
 
 USER>>> 首先加载 .bmad-core/agents/architect.md 文件，以初始化当前模式。初始化完毕回复：准备好了
 
-USER>>> 请基于 用户故事 docs/stories/001.001.add-api.md 和模板 .bmad-core/templates/architecture-tmpl.md 完成架构文档编写。 （这个任务不涉及代码编写） 架构文档输出到文件：docs/architecture.md
+USER>>> 请基于 用户故事 docs/stories/001.001.add-api.md 和模板 .bmad-core/templates/architecture-tmpl.md 完成架构文档编写。 (这个任务不涉及代码编写) 架构文档输出到文件:docs/architecture.md
 
 *create-doc `.bmad-core/templates/architecture-tmpl.md`
 
-补充要求：
-- 算子头文件名 add.h 算子实现文件名 add.cpp 算子测试用例文件名 test_add.cpp
-- 头文件查找目录 include、源码目录 src、测试用例目录 tests
-- 使用make工具
-- 使用doctest框架，这是一个header only库
+## 项目文件规范:
+- **算子头文件**: add.h
+- **算子实现文件**: add.cpp  
+- **算子测试文件**: test_add.cpp
+- **构建工具**: make
+- **测试框架**: doctest (header-only 库)
 
-开发注意：
-- doctest的使用需在其中一个 test_xx.cpp 测试文件中增加 DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 宏定义，如下代码：
-  ```c++
-  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-  #include "doctest.h" 
-  ```
-  注意： DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN Must Before doctest.h
-- CRITICAL 代码中禁止使用 INT_MIN - 1 或 INT_MAX + 1 表达式，需使用类型转换如 static_cast<long long>(INT_MAX) + 1
-- overflow用例测试参考，如：CHECK(some_func(INT_MAX, 1) == INT_MIN);
+## 特殊要求:
+- doctest 配置需要在测试文件中定义 `DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN` 宏，且必须在包含 doctest.h 之前
+- 整数运算安全：禁止直接使用 `INT_MAX + 1`，需要类型转换
+- 构建系统必须支持 `make test` 和 `make clean` 命令
+
+请严格按照项目的 C++ 通用规范 (docs/cpp-project-standards.md) 编写架构文档，确保文件路径、包含方式和目录结构的准确性。
 
 
 ### Dev

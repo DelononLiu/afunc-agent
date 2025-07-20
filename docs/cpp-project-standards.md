@@ -1,9 +1,15 @@
 # C++项目通用规范
 
 ## 目录结构
-- `include/` - 头文件目录
-- `src/` - 实现文件目录  
-- `tests/` - 测试文件目录
+目录结构说明:
+```
+project-root/
+├── include/        # 头文件目录 (用于 -I 编译选项)
+├── src/           # 源码实现目录
+├── tests/         # 测试用例目录
+└── Makefile       # 构建文件
+```
+重要说明: include/ 是编译器搜索头文件的目录，通过 -Iinclude 选项指定。它不是要包含的文件，而是头文件的存放位置。
 
 ## 文件命名
 - 头文件: `[name].h`
@@ -52,3 +58,5 @@ static_cast<long long>(INT_MAX) + 1
 ## 构建系统
 - 使用Make构建系统
 - 必须设置头文件搜索路径：`CPPFLAGS += -Iinclude`
+- 支持 make test 命令运行测试
+- 支持 make clean 清理构建文件
