@@ -11,26 +11,38 @@ docs/templates/prd-tmpl.md
 ### 1、文档生成
 USER>>> 你是一个 C 语言开发者，根据以下项目需求和模板，生成完整的 PRD 文档和 Architecture 文档。
 
-项目需求：
-我需要一个 add 函数，输入两个整数 a 和 b，返回它们的和。支持负数、零、正数。不考虑溢出。需要生成单元测试。
-
-请根据 PRD 模板：@/docs/templates/prd-tmpl.md  生成PRD文档： /docs/prd.md
-
-
-USER>>> 你是一个 C 语言开发者，根据以下项目需求和模板，生成完整的 PRD 文档和 Architecture 文档。
+【任务说明】
+- 仅生成文档，不编写代码
+- 使用 PRD 模板和 Architecture 模板
+- 输出格式为 Markdown
+- 不使用任何测试框架或代码实现
 
 项目需求：
 我需要一个 add 函数，输入两个整数 a 和 b，返回它们的和。支持负数、零、正数。不考虑溢出。需要生成单元测试。
 
-请根据 PRD 模板：@/docs/templates/prd-tmpl.md  生成PRD文档： /docs/prd.md
+请根据 PRD 模板 生成PRD文档： /docs/prd.md
+请根据 Architecture 模板 生成架构文档： /docs/architecture.md
+
+PRD 模板：
+@/docs/templates/prd-tmpl.md
+
+Architecture 模板：
+@/docs/templates/architecture-tmpl.md
 
 
 【偏差数据】
-1、PRD文档生成和架构文档生成后，均去写代码。 意图不明。 人工介入：终止任务
+1、构建工具变成了Cmake。 --> 意图不明。人工介入：改为make
 
 
 ### 2、代码生成 + 自动化迭代
 USER>>> 你是一个 C 语言开发者，根据以下 PRD 和 Architecture 文档，生成 add 函数的实现代码和单元测试代码。
+
+【任务说明】
+- 先写测试用例，再写功能实现
+- 使用 assert 作为测试框架
+- 路径结构为：src/ 与 tests/
+- 不使用 catch2、CUnit 等其他框架
+- 不包含 "../include/" 路径，使用相对路径或标准路径
 
 PRD 文档：
 @/docs/prd.md 
@@ -39,14 +51,16 @@ PRD 文档：
 
 
 【偏差数据】
-1、受到 docs/cpp-project-standards.md影响。已忽略。（后期使用）
-2、一轮迭代一个分支，每一步提交一次。便于恢复 --> 增加脚本或prd增加提交任务
-3、没按TDD，先写测试用例再写功能实现 --> prd文档任务划分需明确
-4 #include "../include/add.h"  --> 人工修改
-5、catch2，又改回去了 --> 架构文档增加测试框架
-6、没有执行测试迭代  --> prd文档任务划分未包含“执行测试”确实
+1、没有先创建接口头文件 --> prd任务划分
+2 #include "../include/add.h"  --> 编译通过，未修改
 
 ### 3、偏差分析与优化
-
+已优化
 
 ### 4、验证入库/回滚
+已验证。
+
+【测试报告】
+遗留问题，下一Iteration 修改：
+1、没有先创建接口头文件
+2、#include "../include/add.h"

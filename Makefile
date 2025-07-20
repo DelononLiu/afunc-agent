@@ -1,13 +1,14 @@
-CXX = g++
-CXXFLAGS = -Wall -Wextra -Iinclude
+CC = gcc
+CFLAGS = -Wall -Wextra -Iinclude
 
+SRC = src/add.c
+TEST_SRC = test/test_add.c
 TARGET = test_add
-SRC = src/add.cpp tests/test_add.cpp
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+$(TARGET): $(SRC) $(TEST_SRC)
+	$(CC) $(CFLAGS) $^ -o $@
 
 test: $(TARGET)
 	./$(TARGET)

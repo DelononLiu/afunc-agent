@@ -30,3 +30,7 @@ def add(a: int, b: int) -> int:
 ## 构建方式
 - 构建工具：CMake、Makefile、setup.py等
 - 构建输出：静态库、动态库、可执行文件、模块包等
+
+## 测试框架
+- 使用 assert 作为测试工具
+- 不使用 catch2、CUnit、Check 等其他框架
