@@ -1,4 +1,4 @@
-## Iteration 4
+## Iteration 5
 增加 ai-coding-workflow.md
 
 ### 0、模板准备
@@ -6,7 +6,6 @@ AI协作，生成了：
 docs/templates/architecture-tmpl.md
 docs/templates/prd-tmpl.md
 
-【偏差数据】模板不通用。已修改。
 
 ### 1、文档生成
 USER>>> 你是一个 C 语言开发者，根据以下项目需求和模板，生成完整的 PRD 文档和 Architecture 文档。
@@ -16,6 +15,7 @@ USER>>> 你是一个 C 语言开发者，根据以下项目需求和模板，生
 - 使用 PRD 模板和 Architecture 模板
 - 输出格式为 Markdown
 - 不使用任何测试框架或代码实现
+- 使用make构建工具
 
 项目需求：
 我需要一个 add 函数，输入两个整数 a 和 b，返回它们的和。支持负数、零、正数。不考虑溢出。需要生成单元测试。
@@ -31,18 +31,23 @@ Architecture 模板：
 
 
 【偏差数据】
-1、构建工具变成了Cmake。 --> 意图不明。人工介入：改为make
-
+无
 
 ### 2、代码生成 + 自动化迭代
 USER>>> 你是一个 C 语言开发者，根据以下 PRD 和 Architecture 文档，生成 add 函数的实现代码和单元测试代码。
 
-【任务说明】
+【规范】
 - 先写测试用例，再写功能实现
 - 使用 assert 作为测试框架
 - 路径结构为：src/ 与 tests/
 - 不使用 catch2、CUnit 等其他框架
-- 不包含 "../include/" 路径，使用相对路径或标准路径
+- 生成 Makefile，支持 `make test` 执行测试
+
+【头文件包含规范】
+所有模块头文件应放在 `include/` 目录下。在源文件中，使用如下方式包含头文件：
+```c
+#include "xxx.h"
+```
 
 PRD 文档：
 @/docs/prd.md 
@@ -51,16 +56,17 @@ PRD 文档：
 
 
 【偏差数据】
-1、没有先创建接口头文件 --> prd任务划分
-2 #include "../include/add.h"  --> 编译通过，未修改
+无
 
 ### 3、偏差分析与优化
-已优化
+- [x] 1、构建工具变成了Cmake
+- [x] 1、没有先创建接口头文件
+- [x] 2、#include "../include/add.h"
 
 ### 4、验证入库/回滚
 已验证。
 
 【测试报告】
-遗留问题，下一Iteration 修改：
-1、没有先创建接口头文件
-2、#include "../include/add.h"
+make test通过。
+无偏差。
+可提交。
