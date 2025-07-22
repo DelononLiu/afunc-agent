@@ -74,3 +74,52 @@ PRD 文档：
 make test通过。
 无偏差。
 可提交。
+
+
+## change to cmake build
+
+### 0、模板准备
+无
+
+### 1、文档生成
+无
+
+### 2、代码生成 + 自动化迭代
+USER>>> 你是一个 C 语言开发者，请把当前 make 构建项目修改为 cmake 工程
+
+【需求】
+- cmake项目名为 funcagent
+- src生成静态库，库名 funcagent
+- test生成可执行文件
+- 同时保留 make 构建
+
+【规范】
+- cmake版本最小版本3.20
+
+
+【任务拆分】
+- 先分析当前 make 构建，了解 源码，头文件，库目录，依赖库，构建目标等信息
+- 创建顶层 CMakeLists.txt
+- 创建 src/CMakeLists.txt
+- 创建 test/CMakeLists.txt
+- cmake构建 并测试
+
+
+### 3、偏差分析与优化
+无
+
+### 4、验证入库/回滚
+【测试报告】
+验证通过。
+
+USER>>> 本次修改变更 更新到 CHANGELOG.md
+
+【要求】
+当前版本始终保持 0.1.x
+最新修改保持再顶部
+
+格式：
+# Func Agent Changelog
+
+### [版本] - 日期
+- 一句话简短描述当前任务
