@@ -1,9 +1,14 @@
+# AI编程提示词记录
+
+> 本文档记录了 每轮迭代 的完整开发流程的所有AI提示词，可用于复现整个开发过程。
+
 ## 技巧
 - 直接@文件，文件内容更聚焦和精准
 
 
-## Iteration 5
+## Base - Iteration5
 模型：deepseek-v3、qwen3-32b
+
 
 ### 0、模板准备
 AI协作，生成了：
@@ -76,7 +81,7 @@ make test通过。
 可提交。
 
 
-## change to cmake build
+## Enhancement 1 - [Build]change to cmake
 
 ### 0、模板准备
 无
@@ -119,7 +124,12 @@ USER>>> 本次修改变更 更新到 CHANGELOG.md
 最新修改保持再顶部
 
 格式：
+```markdown
 # Func Agent Changelog
 
 ### [版本] - 日期
 - 一句话简短描述当前任务
+```
+
+## Enhancement 2 - [Feature] add support float
+
