@@ -1,0 +1,1 @@
+rm Makefile CHANGELOG.md CMakeLists.txt docs/architecture.md docs/prd.md include/add.h src/add.c src/CMakeLists.txt test/CMakeLists.txt test/test_add.c -rf

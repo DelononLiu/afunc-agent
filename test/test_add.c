@@ -1,37 +1,19 @@
-#include "add.h"
 #include <assert.h>
-#include <limits.h>
+#include "add.h"
 
-void test_add_positive_numbers() {
+void test_add() {
+    // Test cases
     assert(add(3, 5) == 8);
-}
-
-void test_add_negative_and_positive() {
-    assert(add(-2, 4) == 2);
-}
-
-void test_add_zero_and_zero() {
+    assert(add(-3, 5) == 2);
     assert(add(0, 0) == 0);
-}
-
-void test_add_minimum_value() {
-    assert(add(INT_MIN, 0) == INT_MIN);
-}
-
-void test_add_maximum_value() {
-    assert(add(INT_MAX, 0) == INT_MAX);
-}
-
-void test_add_negative_numbers() {
-    assert(add(-10, -5) == -15);
+    assert(add(-3, -5) == -8);
+    assert(add(100, -100) == 0);
+    assert(add(-100, 100) == 0);
+    assert(add(0, 5) == 5);
+    assert(add(5, 0) == 5);
 }
 
 int main() {
-    test_add_positive_numbers();
-    test_add_negative_and_positive();
-    test_add_zero_and_zero();
-    test_add_minimum_value();
-    test_add_maximum_value();
-    test_add_negative_numbers();
+    test_add();
     return 0;
 }

@@ -1,11 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
-project(funcagent LANGUAGES C)
+project(funcagent)
 
-# 设置编译选项
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
-
-# 包含头文件目录
-include_directories(include)
+# 设置编译器标志
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
 
 # 添加子目录
 add_subdirectory(src)

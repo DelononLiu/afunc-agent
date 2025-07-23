@@ -1,9 +1,8 @@
-# 添加可执行文件
+# 添加测试源文件
 add_executable(test_add test_add.c)
 
 # 链接静态库
-target_link_libraries(test_add PRIVATE funcagent)
+target_link_libraries(test_add funcagent)
 
-# 设置可执行文件安装路径
-install(TARGETS test_add
-        RUNTIME DESTINATION bin)
+# 包含头文件路径
+target_include_directories(test_add PRIVATE ${CMAKE_SOURCE_DIR}/include)

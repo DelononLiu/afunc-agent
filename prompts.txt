@@ -7,7 +7,7 @@
 
 
 ## Base - Iteration5
-模型：deepseek-v3、qwen3-32b
+模型：deepseek-v3、qwen3-32b、qwen2.5-32b
 
 
 ### 0、模板准备
