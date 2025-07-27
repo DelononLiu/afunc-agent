@@ -1,11 +1,16 @@
 # Architecture - 函数名 / 模块名
 
 ## 模块划分
-- src/xxx.c（或 .cpp/.py）: 核心功能实现
-- include/xxx.h（或无）: 接口声明（C/C++）
-- test/test_xxx.c（或 unittest）: 单元测试
-- CMakeLists.txt / setup.py: 构建脚本
-- README.md: 使用说明
+
+- 核心模块：描述主要的逻辑单元和它们的功能。
+  - 例如：src/ 用于核心功能实现。
+  - 例如：include/ 用于接口声明。
+- 测试模块：描述测试代码的组织方式。
+  - 例如：tests/ 用于单元测试。
+- 构建与文档：描述项目构建和文档相关的组织。
+  - 例如：Makefile 或 CMakeLists.txt 用于构建脚本。
+  - 例如：README.md 提供使用说明。
+- 说明：详细的目录结构和文件命名规范请参考 docs/cpp-project-standards.md。
 
 ## 接口定义
 用语言原生语法描述接口，如：
@@ -28,9 +33,6 @@ def add(a: int, b: int) -> int:
 - 内部依赖：如其他模块、工具函数
 
 ## 构建方式
-- 构建工具：CMake、Makefile、setup.py等
-- 构建输出：静态库、动态库、可执行文件、模块包等
-
-## 测试框架
-- 使用 assert 作为测试工具
-- 不使用 catch2、CUnit、Check 等其他框架
+- 构建工具选择：明确项目使用的主要构建工具（如 Make、CMake、setup.py 等）。
+- 构建产物：描述构建过程会生成哪些类型的产物（如静态库、动态库、可执行文件、模块包等）。
+- 说明：具体的构建配置和命令请参考 docs/cpp-project-standards.md。

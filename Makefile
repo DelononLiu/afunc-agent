@@ -1,38 +1,33 @@
 CC = gcc
-CFLAGS = -Wall -I./src/include
-SRC_DIR = src/operators
-TEST_DIR = tests/operators
-LIB_DIR = lib
-OBJ_DIR = obj
+CPPFLAGS = -Iinclude
+CFLAGS = -Wall -Wextra
 
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+SRC = src/addi.cpp src/addf.cpp
+OBJ = $(SRC:.cpp=.o)
+LIB = libadd.a
 
-LIB_NAME = operator
-LIB = $(LIB_DIR)/lib$(LIB_NAME).a
+TESTS = tests/test_addi tests/test_addf
 
-TEST_SRC = $(wildcard $(TEST_DIR)/*.c)
-TEST_EXE = test_$(LIB_NAME)
+all: $(LIB)
 
-.PHONY: all lib test clean
-
-all: lib test
-
-lib: $(LIB)
-
-$(LIB): $(OBJS)
-	@mkdir -p $(LIB_DIR)
+$(LIB): $(OBJ)
 	ar rcs $@ $^
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-test: $(TEST_EXE)
-	./$(TEST_EXE)
+test: $(TESTS)
+	@for test in $(TESTS); do \
+		echo "Running $$test"; \
+		./$$test || exit 1; \
+	done
 
-$(TEST_EXE): $(TEST_DIR)/test_add.c $(LIB)
-	$(CC) $(CFLAGS) $^ -o $@ -L$(LIB_DIR) -l$(LIB_NAME)
+tests/test_addi: tests/test_addi.cpp src/addi.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) $^ -o $@
 
 clean:
-	rm -rf $(OBJ_DIR) $(LIB_DIR) $(TEST_EXE)
+	rm -f $(OBJ) $(LIB) $(TESTS)
+
+.PHONY: all test clean
+tests/test_addf: tests/test_addf.cpp src/addf.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) $^ -o $@ -lm
