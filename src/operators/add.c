@@ -1,4 +1,4 @@
-#include "operators/add.h"
+#include "operators/operator.h"
 
 int add_int(int a, int b) {
     return a + b;
