@@ -13,9 +13,9 @@
 - 增强代码生成的鲁棒性和通用性 (方向二)：逐步增加功能复杂度，验证AI在更多实际场景下的能力。
 
 
-## Base - Iteration 6：任务驱动的 AI 编程流程
+## Base - Iteration 6.5：统一 AI 编码和项目结构规范
 测试模型：
-- [x] deepseek-v3
+- [ ] deepseek-v3
 - [ ] qwen3-32b
 - [ ] qwen2.5-coder-32b
 
