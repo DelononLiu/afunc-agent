@@ -15,7 +15,7 @@
 
 ## Base - Iteration 6.5：统一 AI 编码和项目结构规范
 测试模型：
-- [ ] deepseek-v3
+- [x] deepseek-v3
 - [ ] qwen3-32b
 - [ ] qwen2.5-coder-32b
 
