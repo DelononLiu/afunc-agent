@@ -25,18 +25,21 @@ cd add-library
 
 ### 2、构建项目
 
-本项目使用 Make 构建系统。
+本项目使用 CMake 构建系统。
 
 ```bash
+mkdir build && cd build
+cmake .. # 生成构建系统
 make # 编译生成静态库 libadd.a
 ```
 
-成功编译后，将在项目根目录生成 `libadd.a` 静态库文件。
+成功编译后，将在 build 目录生成 `libadd.a` 静态库文件。
 
 ### 3、运行测试
 
 ```bash
-make test # 编译并运行单元测试
+cd build
+ctest # 运行所有单元测试
 ```
 
 测试结果将直接在控制台输出。
