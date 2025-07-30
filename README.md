@@ -85,7 +85,6 @@ gcc main.c -L. -ladd -o my_app # 假设 libadd.a 在当前目录
 ├── tests/              # 单元测试文件目录
 │   ├── test_addi.cpp   # addi 单元测试
 │   └── test_addf.cpp   # addf 单元测试
-├── Makefile            # 项目构建文件
 └── README.md           # 本说明文档
 ```
 

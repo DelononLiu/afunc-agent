@@ -190,7 +190,7 @@ P
 无
 
 ### 3、代码生成（AI自动迭代）
-USER>>> 工程名：aaa、cmake_min：2.20
+USER>>> @/docs/func/make_to_cmake.md  工程名：func-add、cmake_min：2.20
 
 ### 4、人工审查与验收
 
