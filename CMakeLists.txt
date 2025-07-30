@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 include_directories(include)
 
 # 添加静态库
-add_library(add STATIC src/addi.cpp src/addf.cpp)
+add_library(add STATIC src/addi.cpp src/addf.cpp src/unified_api.cpp)
 
 # 添加测试程序
 add_executable(test_addi tests/test_addi.cpp)
