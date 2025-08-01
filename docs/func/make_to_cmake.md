@@ -1,4 +1,8 @@
-### 迁移 Make 工程到 CMake 工程
+name: make-to-cmake-migration
+description: 迁移项目构建系统从 Make 到 CMake。
+tools: read, write, bash, grep, glob
+---
+
 
 ### 任务描述
 此任务旨在将一个现有使用 **Make 构建的 C/C++ 项目**迁移到 **CMake 构建系统**。目标是现代化构建流程，确保其跨平台兼容性和可维护性。
