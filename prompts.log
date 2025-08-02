@@ -1,0 +1,4 @@
+start func read-project
+start func read-makefile
+start func generate-cmakelists
+start func run-cmake-target
