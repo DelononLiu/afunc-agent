@@ -22,8 +22,8 @@
 
 ```bash
 git clone [你的仓库地址]
-cd add-library
-````
+cd func-add
+```
 
 ### 2、构建项目
 
@@ -32,10 +32,10 @@ cd add-library
 ```bash
 mkdir build && cd build
 cmake .. # 生成构建系统
-make # 编译生成静态库 libadd.a
+make # 编译生成静态库 libfunc-add.a
 ```
 
-成功编译后，将在 build 目录生成 `libadd.a` 静态库文件。
+成功编译后，将在 build 目录生成 `libfunc-add.a` 静态库文件。
 
 ### 3、运行测试
 
@@ -48,13 +48,14 @@ ctest # 运行所有单元测试
 
 ### 4、集成到你的项目
 
-将 `libadd.a` 静态库和 `include/add.h` 头文件包含到你的项目中。
+将 `libfunc-add.a` 静态库和 `include/add.h` 头文件包含到你的项目中。
 
 **示例:**
 
 假设你的项目文件 `main.c` 如下：
 
 ```c
+#include "add.h" // 原始加法接口
 #include "unified_api.h" // 统一API头文件
 #include <stdio.h>
 
@@ -70,10 +71,10 @@ int main() {
 }
 ```
 
-编译你的项目时，需要链接 `libadd.a`：
+编译你的项目时，需要链接 `libfunc-add.a`：
 
 ```bash
-gcc main.c -L. -ladd -o my_app # 假设 libadd.a 在当前目录
+gcc main.c -L./build -lfunc-add -o my_app
 ```
 
 ## 目录结构
@@ -84,12 +85,12 @@ gcc main.c -L. -ladd -o my_app # 假设 libadd.a 在当前目录
 │   ├── add.h           # 原始加法接口
 │   └── unified_api.h   # 统一API接口
 ├── src/                # 源代码实现目录
-│   ├── addi.c          # 整数加法实现
-│   ├── addf.c          # 浮点数加法实现
+│   ├── addf.cpp        # 浮点数加法实现
+│   ├── addi.cpp        # 整数加法实现
 │   └── unified_api.cpp # 统一API实现
 ├── tests/              # 单元测试文件目录
-│   ├── test_addi.cpp   # addi 单元测试
-│   └── test_addf.cpp   # addf 单元测试
+│   ├── test_addf.cpp   # addf 单元测试
+│   └── test_addi.cpp   # addi 单元测试
 └── README.md           # 本说明文档
 ```
 
@@ -99,4 +100,4 @@ gcc main.c -L. -ladd -o my_app # 假设 libadd.a 在当前目录
 
 ## 许可证
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](https://www.google.com/search?q=LICENSE) 文件了解详情。
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。

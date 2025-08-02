@@ -2,6 +2,7 @@
 build/
 bin/
 obj/
+_tmp_workspace/
 
 # OS generated files
 .DS_Store

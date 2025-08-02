@@ -2,3 +2,30 @@ start func read-project
 start func read-makefile
 start func generate-cmakelists
 start func run-cmake-target
+start func read-project
+start func read-makefile
+start func generate-cmakelists
+start func run-cmake-target
+start func read-project at 2025-08-02 18:26:18
+start func read-project at 2025-08-02 18:36:01
+
+start func read-project at 2025-08-02 18:40:47
+start func read-project at 2025-08-02 18:49:21
+start func read-makefile
+
+
+start func read-project at 2025-08-02 18:55:21
+
+start func read-makefile at 2025-08-02 18:55:50
+start func generate-cmakelists
+start func read-project at 2025-08-02 19:04:38
+start func read-makefile
+start func generate-cmakelists
+start func run-cmake-target
+start func read-project at 2025-08-02 19:18:19
+start func read-makefile
+start func generate-cmakelists
+start func read-project at 2025-08-02 19:25:14
+start func read-makefile at 2025-08-02 19:26:51
+start func generate-cmakelists at 2025-08-02 19:28:02
+start func run-cmake-target at 2025-08-02 19:29:30

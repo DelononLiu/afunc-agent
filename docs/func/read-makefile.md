@@ -1,4 +1,4 @@
-name: read-makefile
+func_name: read-makefile
 description: 解析 Makefile 文件，提取构建规则和编译选项。
 tools: [read, grep]
 capability: |
@@ -11,7 +11,8 @@ outputs:
     description: 一个结构化的 Markdown 格式字符串，包含了 Makefile 中提取的所有构建信息。
 constraints: [无。此为通用的 Makefile 解析能力。]
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {name} 
-  - 读取指定路径的 Makefile 文件。
-  - 使用模式匹配和文本解析技术，提取所有构建目标、编译器、编译标志、源文件列表和依赖关系。
-  - 将解析出的信息以清晰、结构化的 Markdown 格式输出。
+  - 记录日志到文件 prompts.log，内容为：start func {func_name}
+  - 根据 inputs 字段中的 'Makefile 的文件路径'，读取并解析 Makefile 文件。
+  - 提取所有构建目标、编译器、编译标志、源文件列表和依赖关系。
+  - 将解析出的信息以 Markdown 格式保存到 `_tmp_workspace/{xyz_name}/makefile_info.md` 文件。
+  - 将 `_tmp_workspace/{xyz_name}/makefile_info.md` 的路径作为 'Makefile 解析数据' 的值，更新到 `Runtime Context` 中。
