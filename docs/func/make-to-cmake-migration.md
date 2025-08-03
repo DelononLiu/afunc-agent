@@ -17,22 +17,17 @@ tools: [read, write, bash, grep, glob]
 - 请查阅相关的**项目产品需求**和**架构文档**以获取功能细节。
 
 ### 任务 TODO List
-- [x] 调用 read-project 和 read-makefile Func，获取项目结构和构建信息。
-- [x] 调用 generate-cmakelists Func，生成新的 `CMakeLists.txt` 文件。
-- [x] 调用 run-cmake-target Func，构建并验证项目，并将结果写入 `自动化测试报告`。
-- [x] 更新 `README.md` 中的构建说明，以适应 CMake。
-- [x] 再次调用 run-cmake-target Func，运行测试并验证功能，并将结果写入 `自动化测试报告`。
+- [ ] 调用 read-project 和 read-makefile Func，获取项目结构和构建信息。
+- [ ] 调用 generate-cmakelists Func，生成新的 `CMakeLists.txt` 文件。
+- [ ] 调用 run-cmake-target Func，构建并验证项目，并将结果写入 `自动化测试报告`。
+- [ ] 更新 `README.md` 中的构建说明，以适应 CMake。
+- [ ] 再次调用 run-cmake-target Func，运行测试并验证功能，并将结果写入 `自动化测试报告`。
 
 ### Runtime Context
 # 在此区域维护任务的运行时上下文，Agent 将据此进行推理和数据传递
 # 初始值通常来自用户输入
 project_name: func-add
-project_path: .
-project_structure_data: _tmp_workspace/make-to-cmake-migration/project_structure.md
-makefile_parse_data: _tmp_workspace/make-to-cmake-migration/makefile_info.md
-cmakelists_content: _tmp_workspace/make-to-cmake-migration/CMakeLists.txt
-build_log: _tmp_workspace/make-to-cmake-migration/build_log.txt
-test_log: _tmp_workspace/make-to-cmake-migration/test_log.txt
+project_path: `(path to project)`
 
 ### 任务交付件
 - `CMakeLists.txt` (项目根目录)
