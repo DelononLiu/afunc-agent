@@ -24,7 +24,7 @@ tools: [read, write, bash, grep, glob]
 - [ ] 再次调用 run-cmake-target Func，运行测试并验证功能，并将结果写入 `自动化测试报告`。
 
 ### Runtime Context
-# 在此区域维护任务的运行时上下文，Agent 将据此进行推理和数据传递
+# 在此区域维护任务的运行时上下文，用于 Funcs 间进行数据传递 
 # 初始值通常来自用户输入
 project_name: func-add
 project_path: `(path to project)`
@@ -48,3 +48,6 @@ project_path: `(path to project)`
   - test_addf: 通过 (0.00秒)
   - test_addi: 通过 (0.00秒)
 - 测试覆盖率: 100% (2/2)
+
+构建验证: 成功构建项目并运行所有测试用例
+功能验证: 所有测试用例均通过，功能正常

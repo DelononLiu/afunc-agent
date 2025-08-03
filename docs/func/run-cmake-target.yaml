@@ -10,6 +10,7 @@ outputs:
   - name: 执行状态和日志
     description: 一个结构化的 Markdown 格式字符串，包含执行的状态（成功/失败）和完整的日志信息。
 constraints:
+  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
   - 需确保项目已包含 CMakeLists.txt 文件。
   - 执行 'all' 目标前，需确保 CMake 构建目录已存在。
 instructions:
