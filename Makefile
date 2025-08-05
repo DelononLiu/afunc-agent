@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra
 
 SRC = src/addi.cpp src/addf.cpp
 OBJ = $(SRC:.cpp=.o)
-LIB = libadd.a
+LIB = libadd2.a
 
 TESTS = tests/test_addi tests/test_addf
 
