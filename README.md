@@ -1,103 +1,51 @@
-# Add 算子库
-
-> **注意：本 README 文档描述的是由 Func Agent AI 生成的 C 语言算子库。如需了解 Func Agent AI 项目（即本 AI Agent 自身）的详细信息，请查阅 [AGENT_README.md](AGENT_README.md)。**
-
+# Func Agent - AI Coding
 
 ## 项目概述
 
-本仓库包含一个轻量级的 C 语言算子库，当前版本主要提供加法运算功能。该库旨在为需要基本数学运算的嵌入式系统或高性能计算场景提供简洁、高效的接口。
+**Func Agent** 是一个探索AI辅助编程开发流程的实验性项目。通过标准化的迭代流程，验证AI在软件开发全生命周期中的应用效果，包括需求分析、架构设计、代码实现、测试验证等环节。
 
-## 功能特性
+### 核心目标
+- **验证AI编程流程**: 建立可复现的AI辅助开发标准流程
+- **模板驱动开发**: 通过标准化模板提高AI输出的一致性和质量
+- **全流程覆盖**: 从文档生成到代码实现的端到端AI协作
+- **实现一句话需求**：经过N轮迭代后，基于模板+流程，实现`一句话需求`完成整个全流程开发
 
-- **统一加法API**: 提供 `unified_add` 模板函数，自动根据输入类型选择适当的实现
-- **底层实现**:
-  - 整数加法: `addi` 函数
-  - 浮点数加法: `addf` 函数
-- **统一接口**: 提供简洁、类型安全的函数接口
-- **单元测试**: 所有算子函数均附带单元测试，确保功能正确性。
+### 开发模式
+采用**Base + Enhancement**的分层开发模式：
+- **Base Iteration**: 从零开始实现核心功能，建立稳定基线
+- **Enhancement**: 在基线基础上进行功能增强、工具优化、架构改进
+
+### 流程标准化
+每轮迭代遵循固定的5阶段结构：
+- **0、模板准备** - 准备或复用开发模板
+- **1、文档生成** - AI生成PRD、架构设计等文档  
+- **2、代码实现** - AI根据文档生成代码和测试
+- **3、提示词优化** - 优化提示词、模板等
+- **4、验证入库** - 偏差分析、问题修复、质量验证
 
 ## 快速开始
+- 安装VSCode
+- 安装Roo Code插件并配置模型
+- 按照 [prompts.txt](prompts.txt) 步骤进行
 
-### 1、克隆仓库
-
-```bash
-git clone [你的仓库地址]
-cd func-add
-```
-
-### 2、构建项目
-
-本项目使用 CMake 构建系统。
-
-```bash
-mkdir build && cd build
-cmake .. # 生成构建系统
-make # 编译生成静态库 libfunc-add.a
-```
-
-成功编译后，将在 build 目录生成 `libfunc-add.a` 静态库文件。
-
-### 3、运行测试
-
-```bash
-cd build
-ctest # 运行所有单元测试
-```
-
-测试结果将直接在控制台输出。
-
-### 4、集成到你的项目
-
-将 `libfunc-add.a` 静态库和 `include/add.h` 头文件包含到你的项目中。
-
-**示例:**
-
-假设你的项目文件 `main.c` 如下：
-
-```c
-#include "add.h" // 原始加法接口
-#include "unified_api.h" // 统一API头文件
-#include <stdio.h>
-
-int main() {
-    // 使用统一API
-    int sum_int = unified_add(10, 20);
-    float sum_float = unified_add(10.5f, 20.3f);
-
-    printf("Integer sum: %d\n", sum_int);
-    printf("Float sum: %.2f\n", sum_float);
-
-    return 0;
-}
-```
-
-编译你的项目时，需要链接 `libfunc-add.a`：
-
-```bash
-gcc main.c -L./build -lfunc-add -o my_app
-```
-
-## 目录结构
-
-```
-.
-├── include/            # 公共头文件目录
-│   ├── add.h           # 原始加法接口
-│   └── unified_api.h   # 统一API接口
-├── src/                # 源代码实现目录
-│   ├── addf.cpp        # 浮点数加法实现
-│   ├── addi.cpp        # 整数加法实现
-│   └── unified_api.cpp # 统一API实现
-├── tests/              # 单元测试文件目录
-│   ├── test_addf.cpp   # addf 单元测试
-│   └── test_addi.cpp   # addi 单元测试
-└── README.md           # 本说明文档
-```
 
 ## 版本历史
+> 这是`AI Coding`生成的`Func Agent`的CHANGELOG。不是`Func Agent - AI Coding`的CHANGELOG。
 
-查看 [CHANGELOG.md](CHANGELOG.md) 了解本算子库的详细版本变更信息。
+查看 [AGENT_CHANGELOG.md](AGENT_CHANGELOG.md) 了解详细的版本变更信息。
+
+## 贡献指南
+
+1. Fork 本仓库
+2. 创建功能分支 (`git checkout -b feature/新功能`)
+3. 提交更改 (`git commit -am '添加某功能'`)
+4. 推送到分支 (`git push origin feature/新功能`)
+5. 创建 Pull Request
 
 ## 许可证
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+---
+
+**注意**: 这是一个实验性项目，主要用于探索和验证AI辅助编程的流程和方法。代码质量和功能完整性可能不适合生产环境使用。
