@@ -16,7 +16,8 @@
 ## Base - Iteration 7：提示词函数
 测试模型：
 - [x] deepseek-v3
-- [x] glm-4.5.-air
+- [ ] qwen3-32b
+- [ ] qwen2.5-coder-32b
 
 核心理念： 
 一切从“任务”开始。项目被分解为多个任务文件，每个任务文件包含其自身的 TODO 列表。

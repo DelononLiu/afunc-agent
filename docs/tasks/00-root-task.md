@@ -11,7 +11,7 @@
 - src/addf.cpp：浮点数加法实现
 - tests/test_addi.cpp：整数加法测试
 - tests/test_addf.cpp：浮点数加法测试
-- Makefile/CMakeLists.txt：构建脚本
+- Makefile：构建脚本
 - README.md：项目说明文档
 
 ## 任务 TODO List

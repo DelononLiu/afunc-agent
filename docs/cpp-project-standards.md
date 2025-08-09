@@ -74,12 +74,7 @@ static_cast<long long>(INT_MAX) + 1
 ```
 
 ## 构建系统
-- 使用 Make 或 CMake 构建系统
-- Make 构建系统：
-  - 必须设置头文件搜索路径：`CPPFLAGS += -Iinclude`
-  - 支持 make test 命令运行测试
-  - 支持 make clean 清理构建文件
-- CMake 构建系统：
-  - 使用 `include_directories(include)` 设置头文件搜索路径
-  - 支持 `ctest` 命令运行测试
-  - 支持 `make clean` 清理构建文件
+- 使用Make构建系统
+- 必须设置头文件搜索路径：`CPPFLAGS += -Iinclude`
+- 支持 make test 命令运行测试
+- 支持 make clean 清理构建文件

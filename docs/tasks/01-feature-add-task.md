@@ -12,7 +12,7 @@
 - src/addf.cpp：浮点数加法实现  
 - tests/test_addi.cpp：整数加法测试
 - tests/test_addf.cpp：浮点数加法测试
-- Makefile/CMakeLists.txt：构建脚本更新
+- Makefile：构建脚本更新
 
 ## 任务 TODO List
 - [x] 在add.h中定义addi和addf函数原型

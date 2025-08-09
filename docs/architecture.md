@@ -12,7 +12,7 @@
   - tests/test_addf.cpp：浮点数加法单元测试
 
 - 构建与文档：
-  - Makefile/CMakeLists.txt：构建脚本
+  - Makefile：构建脚本
   - README.md：使用说明文档
 
 ## 接口定义
@@ -29,15 +29,9 @@ float addf(float a, float b);
 - 内部依赖：无
 
 ## 构建方式
-- 构建工具：Make 或 CMake
-- 构建产物：静态库libfunc-add.a
-- Make 构建命令：
+- 构建工具：Make
+- 构建产物：静态库libadd.a
+- 构建命令：
   - make：构建库和测试
   - make test：运行单元测试
-  - make clean：清理构建文件
-- CMake 构建命令：
-  - mkdir build && cd build
-  - cmake ..：生成构建系统
-  - make：构建库和测试
-  - ctest：运行单元测试
   - make clean：清理构建文件
