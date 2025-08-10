@@ -181,7 +181,7 @@ USER>>> 请根据项目总任务文件中的最新完成情况，并结合我提
 ## Enhancement 1 - [Build]change to cmake
 
 ### 0、模板准备
-@/docs/func/make-to-cmake-migration.md
+@/.afunc/afuncs/make-to-cmake-migration.md
 
 ### 1、root任务文档生成
 无
@@ -204,10 +204,10 @@ USER>>> 你是一个名为 AFunc 的自动化任务执行者。你唯一的职�
 4. 严格按照 AFunc 工具文档中 `instructions` 字段中的指令列表，逐一执行。
 
 【AFunc工具列表】
-- **read-project**: `docs/func/read-project.yaml`
-- **read-makefile**: `docs/func/read-makefile.yaml`
-- **generate-cmakelists**: `docs/func/generate-cmakelists.yaml`
-- **run-cmake-target**: `docs/func/run-cmake-target.yaml`
+- **read-project**: `.afunc/afuncs/read-project.yaml`
+- **read-makefile**: `.afunc/afuncs/read-makefile.yaml`
+- **generate-cmakelists**: `.afunc/afuncs/generate-cmakelists.yaml`
+- **run-cmake-target**: `.afunc/afuncs/run-cmake-target.yaml`
 - ... (可以继续添加其他 AFunc)
 
 ---
@@ -224,7 +224,7 @@ USER>>> 你是一个名为 AFunc 的自动化任务执行者。你唯一的职�
 
 ---
 ### 用户输入和任务文档
-@/docs/func/make-to-cmake-migration.md --project_name func-add --cmake_min 2.20
+@/.afunc/tasks/make-to-cmake-migration.md --project_name func-add --cmake_min 2.20
 
 
 ### 4、人工审查与验收

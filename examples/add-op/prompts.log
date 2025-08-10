@@ -37,3 +37,9 @@ start func read-project at 2025-08-04 04:15:47
 start func generate-cmakelists at 2025-08-04 04:16:28
 start func run-cmake-target at 2025-08-04 04:16:56
 start func run-cmake-target at 2025-08-04 04:18:27
+
+start func read-makefile at 2025-01-10 15:46:31
+
+start func generate-cmakelists at 2025-01-10 15:48:18
+
+start func run-cmake-target at 2025-01-10 15:49:47
