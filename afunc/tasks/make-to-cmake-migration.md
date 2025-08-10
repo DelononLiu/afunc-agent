@@ -26,8 +26,6 @@ tools: [read, write, bash, grep, glob]
 ### Runtime Context
 # 在此区域维护任务的运行时上下文，用于 Funcs 间进行数据传递
 # 初始值通常来自用户输入
-Makefile 解析数据: _tmp_workspace/make-to-cmake-migration/makefile_info.md
-CMakeLists.txt 的完整内容: CMakeLists.txt
 
 ### 任务交付件
 - `CMakeLists.txt` (项目根目录)
