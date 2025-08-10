@@ -1,8 +1,5 @@
 # Add 算子库
 
-> **注意：本 README 文档描述的是由 AFunc Agent 生成的 C 语言算子库。如需了解 AFunc Agent 项目（即本 AFunc Agent 自身）的详细信息，请查阅 [AFunc-Agent_README.md](AGENT_README.md)。**
-
-
 ## 项目概述
 
 本仓库包含一个轻量级的 C 语言算子库，当前版本主要提供加法运算功能。该库旨在为需要基本数学运算的嵌入式系统或高性能计算场景提供简洁、高效的接口。

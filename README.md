@@ -1,4 +1,4 @@
-# AFunc Agent - Agent for AI Coding with Agentic Function (AFunc).
+# AFunc Agent - gent for AI Coding with AFun(Agentic Function)
 
 ## 项目概述
 
