@@ -1,5 +1,5 @@
 ---
-task_name: temp-task
+xyz_name: temp-task
 description: 执行一次性的临时任务
 tools: [read, write, bash, grep, glob]
 ---

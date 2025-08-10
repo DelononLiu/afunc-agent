@@ -43,3 +43,7 @@ start func read-makefile at 2025-01-10 15:46:31
 start func generate-cmakelists at 2025-01-10 15:48:18
 
 start func run-cmake-target at 2025-01-10 15:49:47
+start func read-makefile at 2025-08-10 17:07:23
+start func generate-cmakelists at 2025-08-10 17:08:34
+start func run-cmake-target at 2025-08-10 17:09:51
+start func run-cmake-target (test) at 2025-08-10 17:13:54
