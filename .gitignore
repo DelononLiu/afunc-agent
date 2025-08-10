@@ -3,6 +3,8 @@ build/
 bin/
 obj/
 _tmp_workspace/
+examples/*/.afunc
+
 
 # OS generated files
 .DS_Store
