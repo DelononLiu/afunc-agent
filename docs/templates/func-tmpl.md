@@ -4,7 +4,7 @@
 # 这些字段用于让 AI 快速解析关键信息，也可用于自动化工具。
 
 name: [func-name-or-task-id]
-# 必填。 FuncAgent 的唯一标识符。
+# 必填。 AFunc 的唯一标识符。
 # 示例: make-to-cmake-migration, unify-add-api
 
 description: [one-sentence-description]
@@ -12,7 +12,7 @@ description: [one-sentence-description]
 # 示例: 迁移项目构建系统从 Make 到 CMake。
 
 tools: [tool1, tool2, tool3]
-# 可选。一个逗号分隔的列表，包含该 FuncAgent 允许使用的工具。
+# 可选。一个逗号分隔的列表，包含该 AFunc 允许使用的工具。
 # 示例: read, write, bash, grep
 
 # 其它自定义元数据字段

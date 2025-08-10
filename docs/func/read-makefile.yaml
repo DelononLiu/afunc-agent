@@ -2,7 +2,7 @@ func_name: read-makefile
 description: 解析 Makefile 文件，提取构建规则和编译选项。
 tools: [read, grep]
 capability: |
-  此 Func 的能力是解析一个 Makefile 文件，并理解其内部定义的构建规则、目标、依赖关系和编译选项。它将提取出的所有信息以结构化的形式输出，供其他 Func 使用。
+  此 AFunc 的能力是解析一个 Makefile 文件，并理解其内部定义的构建规则、目标、依赖关系和编译选项。它将提取出的所有信息以结构化的形式输出，供其他 AFunc 使用。
 inputs:
   - name: Makefile 的文件路径
     description: 待解析的 Makefile 文件的绝对或相对路径。

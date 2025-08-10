@@ -2,7 +2,7 @@ func_name: run-cmake-target
 description: 在指定项目目录中执行 CMake 构建或运行目标，并返回结果。
 tools: [bash]
 capability: |
-  此 Func 的能力是在一个 CMake 项目中执行特定的目标。它可以用于构建项目（例如 all）或运行已编译的可执行文件。它会返回执行的状态和完整的日志。
+  此 AFunc 的能力是在一个 CMake 项目中执行特定的目标。它可以用于构建项目（例如 all）或运行已编译的可执行文件。它会返回执行的状态和完整的日志。
 inputs:
   - name: 要执行的 CMake 目标
     description: 例如 'all' 或可执行文件名称。

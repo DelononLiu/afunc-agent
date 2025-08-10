@@ -1,6 +1,6 @@
 # Add 算子库
 
-> **注意：本 README 文档描述的是由 Func Agent AI 生成的 C 语言算子库。如需了解 Func Agent AI 项目（即本 AI Agent 自身）的详细信息，请查阅 [AGENT_README.md](AGENT_README.md)。**
+> **注意：本 README 文档描述的是由 AFunc Agent 生成的 C 语言算子库。如需了解 AFunc Agent 项目（即本 AFunc Agent 自身）的详细信息，请查阅 [AFunc-Agent_README.md](AGENT_README.md)。**
 
 
 ## 项目概述

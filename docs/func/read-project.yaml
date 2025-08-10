@@ -2,7 +2,7 @@ func_name: read-project
 description: 读取项目目录结构并识别关键文件。
 tools: [read, grep, glob]
 capability: |
-  此 Func 的能力是读取指定路径下的项目文件和目录结构，并以结构化的形式输出。
+  此 AFunc 的能力是读取指定路径下的项目文件和目录结构，并以结构化的形式输出。
   它能够自动识别并突出显示常见的项目配置文件和源代码目录。
 inputs:
   - name: 项目根目录路径

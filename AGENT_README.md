@@ -1,8 +1,8 @@
-# Func Agent - AI Coding
+# AFunc Agent - Agent for AI Coding with Agentic Function (AFunc).
 
 ## 项目概述
 
-**Func Agent** 是一个探索AI辅助编程开发流程的实验性项目。通过标准化的迭代流程，验证AI在软件开发全生命周期中的应用效果，包括需求分析、架构设计、代码实现、测试验证等环节。
+**AFunc Agent** 是一个探索AI辅助编程开发流程的实验性项目。通过标准化的迭代流程，验证AI在软件开发全生命周期中的应用效果，包括需求分析、架构设计、代码实现、测试验证等环节。
 
 ### 核心目标
 - **验证AI编程流程**: 建立可复现的AI辅助开发标准流程
@@ -30,9 +30,6 @@
 
 
 ## 版本历史
-> 这是`AI Coding`生成的`Func Agent`的CHANGELOG。不是`Func Agent - AI Coding`的CHANGELOG。
-
-查看 [AGENT_CHANGELOG.md](AGENT_CHANGELOG.md) 了解详细的版本变更信息。
 
 ## 贡献指南
 

@@ -2,10 +2,10 @@ func_name: generate-cmakelists
 description: 根据项目信息和旧的 Makefile 数据，生成 CMakeLists.txt 文件。
 tools: [read, write]
 capability: |
-  此 Func 的能力是接收原始 Makefile 的解析数据（来自 read-makefile），并据此生成一个功能等效的 CMakeLists.txt 文件内容。
+  此 AFunc 的能力是接收原始 Makefile 的解析数据（来自 read-makefile），并据此生成一个功能等效的 CMakeLists.txt 文件内容。
 inputs:
   - name: Makefile 解析数据
-    description: 来自 read-makefile Func 的输出。
+    description: 来自 read-makefile AFunc 的输出。
 outputs:
   - name: CMakeLists.txt 的完整内容
     description: 包含生成的 CMakeLists.txt 文件内容的字符串。
