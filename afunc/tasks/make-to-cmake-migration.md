@@ -26,6 +26,9 @@ tools: [read, write, bash, grep, glob]
 ### Runtime Context
 # 在此区域维护任务的运行时上下文，用于 Funcs 间进行数据传递
 # 初始值通常来自用户输入
+project_name:（替换为用户输入）
+project_path：（替换为用户输入）
+
 
 ### 任务交付件
 - `CMakeLists.txt` (项目根目录)
@@ -37,4 +40,4 @@ tools: [read, write, bash, grep, glob]
 
 ### 自动化测试报告
 状态：成功 or 失败
-描述: （输出错误码或失败打印信息）
+描述: （简要描述：输出错误码，输出失败打印信息）
