@@ -27,7 +27,7 @@ tools: [read, write, bash, grep, glob]
 # 在此区域维护任务的运行时上下文，用于 Funcs 间进行数据传递
 # 初始值通常来自用户输入
 project_name:（替换为用户输入）
-project_path：（替换为用户输入）
+project_path：（替换为 cwd ）
 
 
 ### 任务交付件

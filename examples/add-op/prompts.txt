@@ -224,7 +224,8 @@ USER>>> 你是一个名为 AFunc 的自动化任务执行者。你唯一的职�
 
 ---
 ### 用户输入和任务文档
-@/.afunc/tasks/make-to-cmake-migration.md --project_name func-add --cmake_min 2.20 --project_path $(pwd)
+用户输入： --project_name func-add --cmake_min 2.20
+@/.afunc/tasks/make-to-cmake-migration.md
 
 
 ### 4、人工审查与验收
