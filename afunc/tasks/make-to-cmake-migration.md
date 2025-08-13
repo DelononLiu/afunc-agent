@@ -1,5 +1,5 @@
 ---
-xyz_name: make-to-cmake-migration
+task_name: make-to-cmake-migration
 description: 迁移项目构建系统从 Make 到 CMake。
 tools: [read, write, bash, grep, glob]
 ---
@@ -30,7 +30,7 @@ project_name:（替换为用户输入）
 project_path：（替换为 cwd ）
 
 
-### 任务交付件
+## 任务交付件
 - `CMakeLists.txt` (项目根目录)
 - 更新后的 `README.md` (项目根目录)
 

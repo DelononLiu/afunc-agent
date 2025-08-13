@@ -6,7 +6,7 @@
 ## 父任务
 /docs/tasks/00-root-task.md
 
-## 产物交付件
+## 任务交付件
 - include/add.h：算子接口声明
 - src/addi.cpp：整数加法实现
 - src/addf.cpp：浮点数加法实现  

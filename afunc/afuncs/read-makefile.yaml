@@ -1,4 +1,4 @@
-func_name: read-makefile
+afunc_name: read-makefile
 description: 解析 Makefile 文件，提取构建规则和编译选项。
 tools: [read, grep]
 capability: |
@@ -13,8 +13,8 @@ constraints:
   - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
   - 此为通用的 Makefile 解析能力
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
+  - 记录日志到文件 prompts.log，内容为：start afunc {afunc_name} at YYYY-MM-DD HH:MM:SS
   - 根据 inputs 字段中的 'Makefile 的文件路径'，读取并解析 Makefile 文件。
   - 提取所有构建目标、编译器、编译标志、源文件列表和依赖关系。
-  - 将解析出的信息以 Markdown 格式保存到 `_tmp_workspace/{xyz_name}/makefile_info.md` 文件。
-  - 将 `_tmp_workspace/{xyz_name}/makefile_info.md` 的路径作为 'Makefile 解析数据' 的值，更新到`{xyz_name}`任务文档的 `Runtime Context` 中。
+  - 将解析出的信息以 Markdown 格式保存到 `_tmp_workspace/{task_name}/makefile_info.md` 文件。
+  - 将 `_tmp_workspace/{task_name}/makefile_info.md` 的路径作为 'Makefile 解析数据' 的值，更新到`{task_name}`任务文档的 `Runtime Context` 中。

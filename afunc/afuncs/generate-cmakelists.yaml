@@ -1,4 +1,4 @@
-func_name: generate-cmakelists
+afunc_name: generate-cmakelists
 description: 根据项目信息和旧的 Makefile 数据，生成 CMakeLists.txt 文件。
 tools: [read, write]
 capability: |
@@ -15,8 +15,8 @@ constraints:
   - 禁止add_custom_target自定义的`clean`、`test`、`all`等target
   - 禁止使用cmake `install()`函数
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
+  - 记录日志到文件 prompts.log，内容为：start afunc {afunc_name} at YYYY-MM-DD HH:MM:SS
   - 将 `(path to makefile_info)` 文件内容中的变量、库文件、源文件、头文件路径和编译选项映射到相应的 CMake 命令。
   - 生成 `CMakeLists.txt` 的完整内容，并保存到 `(path to project)/CMakeLists.txt` 文件。
-  - 将 `(path to project)/CMakeLists.txt` 的路径作为 'CMakeLists.txt 的完整内容' 的值，更新到`{xyz_name}`任务文档的 `Runtime Context` 中。
+  - 将 `(path to project)/CMakeLists.txt` 的路径作为 'CMakeLists.txt 的完整内容' 的值，更新到`{task_name}`任务文档的 `Runtime Context` 中。
   

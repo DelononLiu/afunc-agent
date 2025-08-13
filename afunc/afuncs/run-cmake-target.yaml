@@ -1,4 +1,4 @@
-func_name: run-cmake-target
+afunc_name: run-cmake-target
 description: 在指定项目目录中执行 CMake 构建或运行目标，并返回结果。
 tools: [bash]
 capability: |
@@ -14,8 +14,8 @@ constraints:
   - 需确保项目已包含 CMakeLists.txt 文件。
   - 执行 'all' 目标前，需确保 CMake 构建目录已存在
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
-  - 记录日志到文件 prompts.log，内容为：cmake -S  {project_path} -B _tmp_workspace/{xyz_name}/build/
-  - 创建cmake工程：命令为： cmake -S {project_path} -B _tmp_workspace/{xyz_name}/build/
+  - 记录日志到文件 prompts.log，内容为：start afunc {afunc_name} at YYYY-MM-DD HH:MM:SS
+  - 记录日志到文件 prompts.log，内容为：cmake -S  {project_path} -B _tmp_workspace/{task_name}/build/
+  - 创建cmake工程：命令为： cmake -S {project_path} -B _tmp_workspace/{task_name}/build/
   - 运行target：根据 inputs 字段中的 '要执行的 CMake 目标'，执行相应的构建，并运行命令
   - 返回状态：返回状态和错误日志
