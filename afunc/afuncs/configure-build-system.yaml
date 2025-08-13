@@ -1,0 +1,24 @@
+func_name: configure-build-system
+description: 配置项目的构建系统，如Makefile或CMakeLists.txt。
+tools: [read, write]
+capability: |
+  此 AFunc 的能力是根据项目结构和文件列表，配置或更新项目的构建系统文件。
+  支持生成或更新Makefile和CMakeLists.txt。
+inputs:
+  - name: 构建系统类型
+    description: 要配置的构建系统类型，如"make"、"cmake"等。
+  - name: 项目文件列表
+    description: 包含项目中所有源文件、头文件和测试文件的列表。
+outputs:
+  - name: 构建系统文件路径
+    description: 生成或更新的构建系统文件路径。
+constraints:
+  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
+  - 生成的构建系统文件必须能够正确编译和测试项目
+instructions:
+  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
+  - 根据构建系统类型，选择相应的模板或现有文件
+  - 将项目文件列表整合到构建系统配置中
+  - 生成或更新构建系统文件（如 Makefile 或 CMakeLists.txt）
+  - 验证构建系统文件的正确性
+  - 将构建系统文件路径作为输出返回

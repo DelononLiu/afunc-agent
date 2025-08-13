@@ -15,11 +15,11 @@
 - README.md：项目说明文档
 
 ## 任务 TODO List
-- [x] 生成PRD文档
-- [x] 生成架构文档
-- [x] 实现add算子功能（包括addi和addf）及单元测试
-- [x] 配置Make构建系统
-- [x] 编写README文档
+- [ ] 调用 generate-document AFunc 生成 PRD 文档
+- [ ] 调用 generate-document AFunc 生成架构文档
+- [ ] 调用 implement-cpp-function AFunc 实现 add 算子功能（包括addi和addf）及单元测试
+- [ ] 调用 configure-build-system AFunc 配置 Make 构建系统
+- [ ] 调用 generate-readme AFunc 编写 README 文档
 
 ## 验证与反馈
 ### 人工审查意见 (可选)

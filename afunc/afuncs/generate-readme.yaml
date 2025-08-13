@@ -1,0 +1,24 @@
+func_name: generate-readme
+description: 根据项目信息和功能列表生成项目的README文档。
+tools: [read, write]
+capability: |
+  此 AFunc 的能力是根据项目信息、功能列表和使用说明，生成项目的README文档。
+inputs:
+  - name: 项目信息
+    description: 包含项目名称、描述、功能列表等信息的结构化数据。
+  - name: 使用说明
+    description: 包含项目构建、测试和使用方法的说明。
+outputs:
+  - name: README文件路径
+    description: 生成的README文件路径。
+constraints:
+  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
+  - 生成的README文档必须清晰、完整地描述项目
+instructions:
+  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
+  - 根据项目信息，生成README的标题和项目概述
+  - 根据功能列表，生成项目的功能特性说明
+  - 根据使用说明，生成构建、测试和使用指南
+  - 将所有内容整合成完整的README文档
+  - 将README文档保存到项目根目录
+  - 将README文件路径作为输出返回

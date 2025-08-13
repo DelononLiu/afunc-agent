@@ -1,0 +1,31 @@
+func_name: implement-cpp-function
+description: 实现C++函数，包括头文件声明、源文件实现和测试用例编写。
+tools: [read, write]
+capability: |
+  此 AFunc 的能力是根据函数规格说明，完整实现一个C++函数，包括：
+  1. 在头文件中声明函数原型
+  2. 在源文件中实现函数逻辑
+  3. 编写测试用例覆盖常规值、边界值和特殊值
+inputs:
+  - name: 函数规格说明
+    description: 包含函数名、参数、返回值、功能描述等信息的结构化数据。
+  - name: 函数类型
+    description: 函数的数据类型，如"int"、"float"等。
+outputs:
+  - name: 实现的函数文件路径
+    description: 包含已实现函数的头文件和源文件路径。
+  - name: 测试文件路径
+    description: 包含测试用例的测试文件路径。
+constraints:
+  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
+  - 遵循TDD流程，先编写测试用例再实现功能
+  - 生成的代码必须符合C++编码规范
+instructions:
+  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
+  - 根据函数规格说明和函数类型，生成函数声明代码
+  - 将函数声明添加到相应的头文件中（如 include/add.h）
+  - 根据函数规格说明和函数类型，编写测试用例
+  - 将测试用例保存到相应的测试文件中（如 tests/test_addi.cpp）
+  - 实现函数的具体逻辑
+  - 将函数实现保存到相应的源文件中（如 src/addi.cpp）
+  - 将实现的文件路径和测试文件路径作为输出返回
