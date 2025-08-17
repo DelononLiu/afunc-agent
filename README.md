@@ -15,10 +15,7 @@
 ## 快速开始
 - 安装VSCode
 - 安装Roo Code插件并配置模型
-- 按照 [prompts.txt](prompts.txt) 步骤进行
-
-
-## 版本历史
+- 按照examples示例进行
 
 ## 贡献指南
 
