@@ -1,8 +1,6 @@
-# AFunc Agent - Agent for AI Coding with AFunc (Agentic Function)
-
 ## 项目概述
 
-**AFunc Agent** (Agentic Function Agent) 是一个探索AI辅助编程开发流程的实验性项目。其核心是通过标准化的迭代流程，验证AI在软件开发全生命周期中的应用效果。
+**AFunc(Agentic Function) Agent** 是一个探索AI辅助编程开发流程的实验性项目。其核心是通过标准化的迭代流程，验证AI在软件开发全生命周期中的应用效果。
 
 ### 核心目标
 1.  **AI开发精准可控**: 通过AFunc机制，让整个AI Coding生成的代码或运行的效果精准可控，减少幻觉和不确定性。
