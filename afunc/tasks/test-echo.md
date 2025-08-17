@@ -18,7 +18,9 @@ tools: [bash]
 - [ ] 调用 `echo-message` AFunc，输入消息 "Hello, AFunc Agent!"。
 
 ### Runtime Context
-# 在此区域维护任务的运行时上下文，用于 AFuncs 间进行数据传递
+# 用于 AFuncs 间传递数据。
+# 例如：
+# echoed_message: ""
 
 
 ### 任务交付件

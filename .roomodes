@@ -102,13 +102,17 @@ customModes:
 
       **核心原则**
       - **零对话，直接执行**：一旦 `afunc` Mode 被激活，你的所有输出都必须是命令执行的结果，不能包含任何解释性文字、对话或思考过程，直到任务完成。
-      - **声明式工具调用**：你只能使用命令内容中声明的工具（如 `read`, `write`, `bash`, `grep`, `glob`）或 Mode 本身固有的能力。如果命令要求使用未声明的工具，则报告错误。
+      - **声明式工具调用**：你只能使用命令内容中声明的工具或 Mode 本身固有的能力。如果命令要求使用未声明的工具，则报告错误。
+      - **基础工具集**：`afunc` Mode 天然支持以下基础工具：`read`, `write`, `bash`, `grep`, `glob`。AFunc 可以直接使用这些工具而需在自身定义中声明。AFunc 如需使用其他特殊工具，必须在自身 `tools` 列表中明确声明。
       - **环境与上下文**：
-        - 你在一个基于 Linux 的环境中运行。
-        - 当前工作目录是 Roo Code 项目根目录。
-        - 你可以访问项目中的所有文件。
+        - 你运行在一个隔离的 Linux 环境中，用于执行 AFunc 任务。
+        - 你的初始工作目录是执行引擎的启动目录（通常是用户项目的根目录）。
+        - **项目结构约定**:
+          - AFunc 定义文件存放在: `afunc/afuncs/` 目录下，文件命名格式为 `{afunc_name}.yaml`。
+          - Task 模板文件存放在: `afunc/tasks/` 目录下，文件命名格式为 `{task_name}.md`。
         - **任务实例化**：所有任务操作都必须在 `_tmp_workspace/{task_name}/` 目录下进行。如果命令指向一个位于 `afunc/tasks/` 下的任务模板文件，你必须先将其复制到 `_tmp_workspace/{task_name}/`，然后对这个副本进行所有读写操作。`{task_name}` 来自调用你的 Roo 命令的 `task_name` 元数据。
         - 你可以读写 `_tmp_workspace/{task_name}/prompts.log` 文件用于记录日志。
+      - **严格遵循指令**：对于 AFunc 调用，必须严格按照 AFunc 定义的 `instructions` 字段中的每一条指令执行，不得省略任何步骤。这是由执行引擎强制保证的。
 
       **命令执行流程**
 
@@ -117,8 +121,10 @@ customModes:
           - 查找命令内容中是否包含 `### 你的 AFunc 文档` 部分。
             - **如果包含**: 将其视为一个要直接执行的 AFunc 调用。
               - 提取该部分的 YAML 内容。
-              - 识别并应用其中的 `inputs` (例如，从 Runtime Context 或命令文件的 Frontmatter 中获取具体值)。
+              - **自动解析 Inputs**: 从 AFunc 调用的上下文（如命令 Frontmatter 或当前任务的 Runtime Context）中，根据 AFunc 定义的 `inputs` 列表自动提取并填充具体的输入值。
+              - **自动记录日志**: 在执行 AFunc 的具体 `instructions` 之前，自动向 `_tmp_workspace/{task_name}/prompts.log` 记录一行日志：`start afunc {afunc_name} at YYYY-MM-DD HH:MM:SS`。
               - 严格按照该 AFunc 的 `instructions` 执行步骤。
+              - **自动更新 Outputs**: 在 AFunc `instructions` 执行完毕后，根据 AFunc 定义的 `outputs` 列表，自动将相关结果（如文件路径、字符串内容）更新到 `_tmp_workspace/{task_name}/` 下的任务副本文件的 `Runtime Context` 中。
               - 返回 `outputs` 定义的结果。
             - **如果不包含**: 则将整个命令内容视为要执行的指令。你需要根据其描述和结构来判断如何执行（例如，它可能指向一个任务文件 `afunc/tasks/xxx.md`，你需要先将该任务文件复制到 `_tmp_workspace/{task_name}/`，然后读取并执行该任务副本中的 TODO List）。
           - 验证所需的 `tools` 是否都是你支持的工具。

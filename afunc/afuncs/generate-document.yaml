@@ -13,10 +13,8 @@ outputs:
   - name: 生成的文档内容
     description: 生成的文档完整内容。
 constraints:
-  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
   - 生成的文档必须符合项目模板规范
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
   - 根据输入的文档类型，选择相应的文档模板
   - 将项目信息填充到模板中，生成完整的文档内容
   - 将生成的文档保存到项目相应路径下（如 docs/prd.md 或 docs/architecture.md）

@@ -10,10 +10,8 @@ outputs:
   - name: Makefile 解析数据
     description: 一个结构化的 Markdown 格式字符串，包含了 Makefile 中提取的所有构建信息。
 constraints:
-  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
   - 此为通用的 Makefile 解析能力
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start afunc {afunc_name} at YYYY-MM-DD HH:MM:SS
   - 根据 inputs 字段中的 'Makefile 的文件路径'，读取并解析 Makefile 文件。
   - 提取所有构建目标、编译器、编译标志、源文件列表和依赖关系。
   - 将解析出的信息以 Markdown 格式保存到 `_tmp_workspace/{task_name}/makefile_info.md` 文件。

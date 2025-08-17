@@ -11,10 +11,8 @@ outputs:
   - name: 项目结构数据
     description: 一个结构化的 Markdown 格式字符串，其中包含了项目文件树和关键文件路径。
 constraints:
-  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
-  - 此为通用的项目结构读取能力。]
+  - 此为通用的项目结构读取能力。
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start afunc {afunc_name} at YYYY-MM-DD HH:MM:SS
   - 根据 inputs 字段中的 '项目根目录路径'，执行文件和文件夹的列举。
   - 将项目结构以 Markdown 格式保存到 `_tmp_workspace/{task_name}/project_structure.md` 文件。
   - 将 `_tmp_workspace/{task_name}/project_structure.md` 的路径作为 '项目结构数据' 的值，更新到`{task_name}`任务文档的 `Runtime Context` 中。

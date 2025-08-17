@@ -17,11 +17,9 @@ outputs:
   - name: 测试文件路径
     description: 包含测试用例的测试文件路径。
 constraints:
-  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
   - 遵循TDD流程，先编写测试用例再实现功能
   - 生成的代码必须符合C++编码规范
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
   - 根据函数规格说明和函数类型，生成函数声明代码
   - 将函数声明添加到相应的头文件中（如 include/add.h）
   - 根据函数规格说明和函数类型，编写测试用例

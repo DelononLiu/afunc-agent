@@ -1,4 +1,4 @@
-afunc_name: echo-message
+afunc_name: echo
 description: 一个简单的 AFunc，用于回显一条消息。
 tools: [bash]
 capability: |
@@ -10,9 +10,7 @@ outputs:
   - name: echoed_message
     description: 回显的消息，与输入相同。
 constraints:
-  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤。
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start afunc {afunc_name} at YYYY-MM-DD HH:MM:SS
   - 记录日志到文件 prompts.log，内容为：Echoing message: {message}
   - 执行命令 `echo "{message}"` 来回显消息。
   - 将回显的消息 "{message}" 作为 'echoed_message' 的值，更新到 `{task_name}` 任务文档的 `Runtime Context` 中。

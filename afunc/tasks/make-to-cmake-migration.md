@@ -24,8 +24,7 @@ tools: [read, write, bash, grep, glob]
 - [ ] 更新 `README.md` 中的构建说明，以适应 CMake。
 
 ### Runtime Context
-# 在此区域维护任务的运行时上下文，用于 Funcs 间进行数据传递
-# 初始值通常来自用户输入
+# 用于 AFuncs 间传递数据。
 project_name:（替换为用户输入）
 project_path：（替换为 cwd ）
 

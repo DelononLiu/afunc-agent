@@ -12,10 +12,8 @@ outputs:
   - name: README文件路径
     description: 生成的README文件路径。
 constraints:
-  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
   - 生成的README文档必须清晰、完整地描述项目
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
   - 根据项目信息，生成README的标题和项目概述
   - 根据功能列表，生成项目的功能特性说明
   - 根据使用说明，生成构建、测试和使用指南

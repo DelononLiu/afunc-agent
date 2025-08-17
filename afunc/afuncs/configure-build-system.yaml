@@ -13,10 +13,8 @@ outputs:
   - name: 构建系统文件路径
     description: 生成或更新的构建系统文件路径。
 constraints:
-  - **严格遵循指令**：必须严格按照 `instructions` 字段中的每一条指令执行，不得省略任何步骤
   - 生成的构建系统文件必须能够正确编译和测试项目
 instructions:
-  - 记录日志到文件 prompts.log，内容为：start func {func_name} at YYYY-MM-DD HH:MM:SS
   - 根据构建系统类型，选择相应的模板或现有文件
   - 将项目文件列表整合到构建系统配置中
   - 生成或更新构建系统文件（如 Makefile 或 CMakeLists.txt）
