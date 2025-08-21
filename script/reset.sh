@@ -3,4 +3,5 @@ rm -rf CHANGELOG.md \
     docs/prd.md docs/architecture.md \
     include/* src/* tests/* \
     Makefile \
+    README.md \
     CMakeLists.txt src/CMakeLists.txt tests/CMakeLists.txt 
