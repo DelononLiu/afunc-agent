@@ -1,49 +1,9 @@
-start func read-project
-start func read-makefile
-start func generate-cmakelists
-start func run-cmake-target
-start func read-project
-start func read-makefile
-start func generate-cmakelists
-start func run-cmake-target
-start func read-project at 2025-08-02 18:26:18
-start func read-project at 2025-08-02 18:36:01
-
-start func read-project at 2025-08-02 18:40:47
-start func read-project at 2025-08-02 18:49:21
-start func read-makefile
-
-
-start func read-project at 2025-08-02 18:55:21
-
-start func read-makefile at 2025-08-02 18:55:50
-start func generate-cmakelists
-start func read-project at 2025-08-02 19:04:38
-start func read-makefile
-start func generate-cmakelists
-start func run-cmake-target
-start func read-project at 2025-08-02 19:18:19
-start func read-makefile
-start func generate-cmakelists
-start func read-project at 2025-08-02 19:25:14
-start func read-makefile at 2025-08-02 19:26:51
-start func generate-cmakelists at 2025-08-02 19:28:02
-start func run-cmake-target at 2025-08-02 19:29:30
-start func read-project at 2025-08-04 03:35:40
-start func generate-cmakelists at 2025-08-04 03:36:17
-start func run-cmake-target at 2025-08-04 03:36:38
-start func run-cmake-target at 2025-08-04 03:37:11
-start func read-project at 2025-08-04 04:15:47
-start func generate-cmakelists at 2025-08-04 04:16:28
-start func run-cmake-target at 2025-08-04 04:16:56
-start func run-cmake-target at 2025-08-04 04:18:27
-
-start func read-makefile at 2025-01-10 15:46:31
-
-start func generate-cmakelists at 2025-01-10 15:48:18
-
-start func run-cmake-target at 2025-01-10 15:49:47
-start func read-makefile at 2025-08-10 17:07:23
-start func generate-cmakelists at 2025-08-10 17:08:34
-start func run-cmake-target at 2025-08-10 17:09:51
-start func run-cmake-target (test) at 2025-08-10 17:13:54
+start afunc implement-cpp-function at 2025-08-22 01:57:54
+start afunc unify-existing-interface at 2025-08-22 02:00:29
+start afunc implement-cpp-function at 2025-08-22 02:01:37
+start afunc generate-cmakelists at 2025-08-22 02:02:55
+start afunc configure-build-system at 2025-08-22 02:03:51
+start afunc run-cmake-target at 2025-08-22 02:06:11
+start afunc generate-readme at 2025-08-22 02:07:11
+start afunc generate-document at 2025-08-22 02:08:29
+Task completed at 2025-08-22 02:10:12
