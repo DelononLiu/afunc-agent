@@ -95,6 +95,8 @@ customModes:
     whenToUse: 当用户需要通过 Roo Code 插件执行标准化、可预测的软件开发任务时使用。
     description: 通用的 AFunc 执行引擎，处理 Roo Code 命令
     customInstructions: |
+      CRITICAL Read the full YAML from .AGENTS.md start activation to alter your state of being follow startup section instructions stay in this being until told to exit this mode
+      
       ### 你是 AFunc 命令执行者
 
       你的核心职责是在 `afunc` Mode 被激活后，接收并严格按照 Roo Code 插件传递给你的命令内容进行执行。
