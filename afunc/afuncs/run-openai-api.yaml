@@ -1,0 +1,42 @@
+func_name: run-openai-api
+description: 调用 OpenAI API 并返回结果。
+tools: [bash]
+capability: |
+  此 AFunc 的能力是调用 OpenAI API 发送提示并获取响应结果，支持不同的提示参数和错误处理。
+inputs:
+  - name: prompt
+    description: 要发送给 OpenAI API 的提示文本。
+  - name: model
+    description: 使用的模型名称，默认为 "gpt-3.5-turbo"。
+  - name: max_tokens
+    description: 最大令牌数，默认为 1000。
+  - name: temperature
+    description: 温度参数，控制输出的随机性，默认为 0.7。
+outputs:
+  - name: content
+    description: OpenAI API 返回的内容。
+  - name: response_status
+    description: API 调用状态，"success" 或 "error"。
+  - name: error_message
+    description: 如果发生错误，包含错误信息。
+constraints:
+  - 必须提供有效的 OpenAI API 密钥
+  - 提示文本不能为空（除非专门测试空输入）
+  - 确保网络连接正常
+instructions:
+  - 检查输入参数，特别是 prompt 是否为空
+  - 如果 prompt 为空，记录错误并设置 response_status 为 "error"
+  - 从环境变量中获取 OPENAI_API_KEY
+  - 构造 curl 命令调用 OpenAI API：
+    `curl -X POST https://api.openai.com/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    -d '{"model": "{model}", "messages": [{"role": "user", "content": "{prompt}"}], "max_tokens": {max_tokens}, "temperature": {temperature}}'`
+  - 执行 API 调用并捕获响应
+  - 如果调用成功，提取返回的 content 并设置 response_status 为 "success"
+  - 如果调用失败，记录错误信息并设置 response_status 为 "error"
+  - 将返回的 content 设置为输出 content
+  - 将 API 调用状态设置为输出 response_status
+  - 如果有错误，将错误信息设置为输出 error_message
+  - 在任务文档的 Runtime Context 中更新 agent_test_result 为返回的 content
+  - 在任务文档的 Runtime Context 中更新 api_endpoint_test 为 response_status

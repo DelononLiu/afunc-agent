@@ -1,0 +1,39 @@
+func_name: implement-openai-compatible-api
+description: 实现 FastAPI /chat/completions 端点并构造 OpenAI 兼容的响应格式。
+tools: [read, write]
+capability: |
+  此 AFunc 的能力是实现标准的 OpenAI 兼容 API 端点，包括请求格式验证、响应格式构造和错误处理。
+inputs:
+  - name: main_py_path
+    description: 现有的 main.py 文件路径，用于更新或集成。
+  - name: api_endpoint
+    description: API 端点路径，默认为 "/chat/completions"。
+  - name: response_format
+    description: 响应格式规范，默认为 OpenAI 标准格式。
+outputs:
+  - name: updated_main_py_path
+    description: 更新后的 main.py 文件路径。
+  - name: api_endpoint_implemented
+    description: API 端点实现状态，true 表示成功实现。
+  - name: response_format_compatible
+    description: 响应格式兼容性状态，true 表示与 OpenAI 格式兼容。
+constraints:
+  - 必须确保与现有的 FastAPI 服务兼容
+  - 响应格式必须符合 OpenAI API 规范
+  - 必须处理各种边界情况和错误输入
+instructions:
+  - 读取现有的 main.py 文件（如果存在）
+  - 实现 OpenAI 兼容的请求模型（ChatCompletionRequest）
+  - 实现 OpenAI 兼容的响应模型（ChatCompletionResponse）
+  - 在 FastAPI 应用中添加 /chat/completions 端点
+  - 实现请求验证逻辑，包括必需字段检查
+  - 实现响应构造逻辑，确保格式与 OpenAI API 兼容
+  - 添加错误处理机制，包括 HTTP 异常处理
+  - 集成 CrewAI 调用逻辑到 API 端点中
+  - 添加适当的日志记录和监控
+  - 更新或生成 main.py 文件
+  - 将更新后的文件路径设置为输出 updated_main_py_path
+  - 将 API 端点实现状态设置为 true 作为输出 api_endpoint_implemented
+  - 将响应格式兼容性状态设置为 true 作为输出 response_format_compatible
+  - 在任务文档的 Runtime Context 中更新 api_endpoint_implemented 为 true
+  - 在任务文档的 Runtime Context 中更新 response_format_compatible 为 true
