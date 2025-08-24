@@ -32,7 +32,7 @@
 | 用户输入话题 | ✅ | 在 Open WebUI 输入框输入 |
 | 触发多 Agent 讨论 | ✅ | 3个 Agent 轮流发言 1 轮 |
 | 每个 Agent 用不同模型 | ✅ | 通过 OpenAI API 指定不同模型（qwen3-coder/glm-4.5） |
-| 显示带角色名的发言 | ✅ | \[哲学家\]：... 格式 |
+| 显示带角色名的发言 | ✅ | \[领域专家\]：... 格式 |
 | Open WebUI 前端不修改 | ✅ | 仅替换后端 API |
 | 支持流式输出（可选） | ❌（MVP 不做） | 先做整段返回 |
 
@@ -80,7 +80,7 @@ POST /chat/completions
       "index": 0,  
       "message": {  
         "role": "assistant",  
-        "content": "\[哲学家\]：AI 是工具，不会取代人类意志……\\n\\n\[工程师\]：但从技术角度看，自动化已取代初级岗位……\\n\\n\[经济学家\]：未来就业结构将重塑……"  
+        "content": "\[领域专家\]：AI 是工具，不会取代人类意志……\\n\\n\[创意思考者\]：但从技术角度看，自动化已取代初级岗位……\\n\\n\[批判性思考者\]：未来就业结构将重塑……"
       },  
       "finish\_reason": "stop"  
     }  
@@ -127,35 +127,35 @@ class ChatRequest(BaseModel):
     messages: list
 
 def create\_roundtable\_crew(topic: str):  
-    researcher \= Agent(  
-        role="哲学家",  
-        goal="从人文角度分析",  
-        backstory="你擅长批判性思维和伦理探讨。",  
+    domain_expert \= Agent(  
+        role="领域专家",  
+        goal="提供专业领域的知识和见解",  
+        backstory="你拥有深厚的专业知识和经验，能够从专业角度提供深入的见解和分析。",  
         llm="openai/qwen3-coder",  
         verbose=True  
-    )  
-    engineer \= Agent(  
-        role="AI 工程师",  
-        goal="从技术实现角度分析",  
-        backstory="你是一线开发者，注重可行性。",  
+    )
+    creative_thinker \= Agent(  
+        role="创意思考者",  
+        goal="提供创新思路和跳出常规的思维",  
+        backstory="你擅长创新思维，能够提供突破常规的想法和解决方案，挑战传统思维模式。",  
         llm="openai/glm-4.5",  
         verbose=True  
-    )  
-    economist \= Agent(  
-        role="经济学家",  
-        goal="分析经济与社会影响",  
-        backstory="你关注就业与生产力变革。",  
+    )
+    critical_thinker \= Agent(  
+        role="批判性思考者",  
+        goal="质疑假设，发现潜在问题，提供不同视角",  
+        backstory="你具备批判性思维能力，能够从不同角度审视问题，发现潜在风险和改进空间。",  
         llm="openai/qwen3-coder",  
         verbose=True  
     )
 
-    task1 \= Task(description=f"讨论话题：{topic}，你是哲学家，请先发言。", agent=researcher)  
-    task2 \= Task(description=f"讨论话题：{topic}，你是工程师，请回应。", agent=engineer)  
-    task3 \= Task(description=f"讨论话题：{topic}，你是经济学家，请总结。", agent=economist)
+    task1 \= Task(description=f"讨论话题：{topic}，你是领域专家，请先发言。", agent=domain_expert)
+    task2 \= Task(description=f"讨论话题：{topic}，你是创意思考者，请回应。", agent=creative_thinker)
+    task3 \= Task(description=f"讨论话题：{topic}，你是批判性思考者，请总结。", agent=critical_thinker)
 
     return Crew(  
-        agents=\[researcher, engineer, economist\],  
-        tasks=\[task1, task2, task3\],  
+        agents=[domain_expert, creative_thinker, critical_thinker],  
+        tasks=[task1, task2, task3],  
         process=Process.sequential,  
         verbose=2  
     )
