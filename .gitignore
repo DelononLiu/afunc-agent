@@ -3,6 +3,7 @@ build/
 bin/
 obj/
 _tmp_workspace/
+ai-round-env
 
 # OS generated files
 .DS_Store
