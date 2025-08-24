@@ -10,10 +10,9 @@
 - 部署文档和使用指南
 
 ## 任务 TODO List
-- [ ] 配置 Open WebUI 指向 FastAPI 后端
-- [ ] 测试端到端流程（用户输入 → 多 Agent 讨论 → 返回结果）
-- [ ] 验证 Open WebUI 显示效果
-- [ ] 生成部署文档和使用指南
+- [ ] 人工配置 Open WebUI 指向 FastAPI 后端
+- [ ] 人工测试端到端流程（用户输入 → 多 Agent 讨论 → 返回结果）并验证 Open WebUI 显示效果
+- [ ] 调用 `generate_readme` afunc，更新 README.md，包含部署文档和使用指南
 
 ## 验证与反馈
 ### 人工审查意见 (可选)

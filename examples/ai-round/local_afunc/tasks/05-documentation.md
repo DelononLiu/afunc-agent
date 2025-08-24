@@ -10,10 +10,7 @@
 - 部署文档和使用指南
 
 ## 任务 TODO List
-- [ ] 生成 README.md 文件
-- [ ] 生成 requirements.txt 文件
-- [ ] 生成 .env.example 文件
-- [ ] 生成部署文档
+- [ ] 调用 `generate_readme` afunc，生成包含项目说明、依赖列表、环境变量配置示例和部署指南的 README.md 文件
 
 ## 验证与反馈
 ### 人工审查意见 (可选)
