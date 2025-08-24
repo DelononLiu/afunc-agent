@@ -11,11 +11,9 @@
 - 单个 Agent 调用测试成功
 
 ## 任务 TODO List
-- [ ] 创建 Python 虚拟环境
-- [ ] 安装 CrewAI、FastAPI、uvicorn、pydantic、openai 依赖
-- [ ] 配置环境变量（OPENAI_API_BASE、OPENAI_API_KEY）
-- [ ] 创建 main.py 文件，实现单个 Agent 调用
-- [ ] 测试单个 Agent 调用是否正常工作
+- [ ] 调用 `setup_python_venv` afunc，创建 Python 虚拟环境并安装依赖 (CrewAI, FastAPI, uvicorn, pydantic, openai)
+- [ ] 调用 `implement_crewai_agents` afunc，实现单个 Agent 调用 CrewAI
+- [ ] 调用 `run_openai_api` afunc，参数：`"你好，请简单介绍一下自己。"`，验证返回的 `content`
 
 ## 验证与反馈
 ### 人工审查意见 (可选)

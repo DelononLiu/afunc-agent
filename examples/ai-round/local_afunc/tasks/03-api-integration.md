@@ -10,10 +10,9 @@
 - 错误处理机制测试通过
 
 ## 任务 TODO List
-- [ ] 实现 FastAPI /chat/completions 端点
-- [ ] 构造 OpenAI 兼容的响应格式
-- [ ] 测试 API 调用和响应格式
-- [ ] 验证错误处理机制
+- [ ] 调用 `implement_openai_compatible_api` afunc，实现 FastAPI /chat/completions 端点并构造 OpenAI 兼容的响应格式
+- [ ] 调用 `run_openai_api` afunc，参数：`"正常请求"`，验证响应格式
+- [ ] 调用 `run_openai_api` afunc，参数：`""`，验证错误处理
 
 ## 验证与反馈
 ### 人工审查意见 (可选)
