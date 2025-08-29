@@ -19,4 +19,4 @@
 
 ## Runtime Context
 PROJECT_ROOT_PATH=(替换为 项目根目录)
-venv_path=
+venv_path=${PROJECT_ROOT_PATH}/.venv/

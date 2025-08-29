@@ -4,6 +4,8 @@ tools: [read, write]
 capability: |
   此 AFunc 的能力是实现 CrewAI Agent，包括单个 Agent 和多个 Agent 的配置，支持不同的角色定义和协作逻辑。
 inputs:
+  - name: code_filepath 
+    description: 生成的代码的文件路径
   - name: agent_configs
     description: Agent 配置列表，包含角色、目标、背景故事等信息。
   - name: task_description
@@ -11,12 +13,8 @@ inputs:
   - name: collaboration_mode
     description: 协作模式，"single" 表示单个 Agent，"multi" 表示多个 Agent 协作。
 outputs:
-  - name: main_py_path
-    description: 生成的 main.py 文件路径。
-  - name: agents_configured
-    description: Agent 配置状态，true 表示配置成功。
-  - name: multi_agent_logic
-    description: 多 Agent 逻辑实现状态，true 表示实现成功。
+  - name: agent_py_path
+    description: 生成的 agent.py 文件路径。
 constraints:
   - 必须提供有效的 OpenAI API 密钥
   - 确保 Agent 角色定义合理且不冲突
@@ -25,11 +23,9 @@ instructions:
   - 如果 collaboration_mode 为 "single"，创建单个 Agent 并设置任务
   - 如果 collaboration_mode 为 "multi"，创建多个 Agent 并设置协作逻辑
   - 实现 CrewAI 的 Crew 对象，配置 Agent 之间的协作流程
-  - 生成 main.py 文件，包含 FastAPI 服务和 CrewAI 集成
-  - 在 main.py 中实现 /chat/completions 端点的初步版本
+  - 生成 ${code_filepath} 文件，包含 FastAPI 服务和 CrewAI 集成
+  - 在 ${code_filepath} 中实现 /chat/completions 端点的初步版本
   - 添加必要的错误处理和日志记录
-  - 将生成的 main.py 文件路径设置为输出 main_py_path
-  - 将 Agent 配置状态设置为 true 作为输出 agents_configured
+  - 将生成的 ${code_filepath} 文件路径设置为输出 agent_py_path
   - 将多 Agent 逻辑实现状态设置为 true 作为输出 multi_agent_logic
-  - 在任务文档的 Runtime Context 中更新 agents_configured 为 true
-  - 在任务文档的 Runtime Context 中更新 multi_agent_logic 为 true
+  - 更新任务文档的 Runtime Context
