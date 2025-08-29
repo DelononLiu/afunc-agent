@@ -2,14 +2,14 @@ func_name: setup-python-venv
 description: 创建 Python 虚拟环境并安装项目依赖。
 tools: [bash]
 capability: |
-  此 AFunc 的能力是创建 Python 虚拟环境，并安装 CrewAI、FastAPI、uvicorn、pydantic、openai 等项目依赖。
+  此 AFunc 的能力是创建 Python 虚拟环境，并安装项目依赖。
 inputs:
   - name: env_name
-    description: 虚拟环境名称，默认为 ai-round-env。
+    description: 虚拟环境名称，默认为 .venv
   - name: requirements
-    description: 要安装的依赖包列表，默认包含 CrewAI、FastAPI、uvicorn、pydantic、openai。
+    description: 要安装的依赖包列表，默认为 requirements.txt
 outputs:
-  - name: env_path
+  - name: venv_path
     description: 创建的虚拟环境路径。
   - name: dependencies_installed
     description: 依赖安装状态，true 表示成功安装。
@@ -20,10 +20,6 @@ instructions:
   - 执行命令 `python3 -m venv {env_name}` 创建虚拟环境
   - 激活虚拟环境：`source {env_name}/bin/activate`
   - 升级 pip：`pip install --upgrade pip`
-  - 安装依赖：`pip install crewai fastapi uvicorn pydantic openai python-dotenv`
-  - 生成 requirements.txt 文件：`pip freeze > requirements.txt`
-  - 创建 .env.example 文件，包含必要的环境变量示例
-  - 将虚拟环境路径设置为输出 env_path
-  - 将依赖安装状态设置为 true 作为输出 dependencies_installed
-  - 在任务文档的 Runtime Context 中更新 env_setup_status 为 "completed"
-  - 在任务文档的 Runtime Context 中更新 dependencies_installed 为 true
+  - 安装依赖：`pip install requirements.txt`
+  - 将虚拟环境路径设置为输出 venv_path
+  - 更新任务文档的 Runtime Context

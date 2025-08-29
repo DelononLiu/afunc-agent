@@ -192,44 +192,20 @@ async def chat\_completions(request: ChatRequest):
 
 ## **✅ 六、Python venv 部署方式**
 
-### **1. 创建虚拟环境**
+### **1. 虚拟环境**
+- 虚拟环境目录： {PROJECT_ROOT_PATH}/.venv/
+- 依赖： requirements.txt
+- 环境变量： {PROJECT_ROOT_PATH}/.env
 
-```bash
-# 创建虚拟环境
-python -m venv ai-round-env
 
-# 激活虚拟环境
-# Linux/Mac:
-source ai-round-env/bin/activate
-# Windows:
-ai-round-env\Scripts\activate
-```
-
-### **2. 安装依赖**
-
-```bash
-# 安装所需依赖
-pip install crewai fastapi uvicorn pydantic openai
-```
-
-### **3. 配置环境变量**
-
-创建 `.env` 文件：
-
-```bash
-# .env 文件内容
-OPENAI_API_BASE=https://api.openai.com/v1  # 或第三方兼容服务地址
-OPENAI_API_KEY=your-openai-api-key        # 替换为实际的 API Key
-```
-
-### **4. 运行服务**
+### **2. 运行服务**
 
 ```bash
 # 启动 FastAPI 服务
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-### **5. 配置 Open WebUI**
+### **3. 配置 Open WebUI**
 
 Open WebUI 已部署为现成系统，只需在配置中：
 - 设置 API Base URL 为：`http://your-fastapi-service:8000`

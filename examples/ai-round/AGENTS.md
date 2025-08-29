@@ -68,35 +68,11 @@
 - 虚拟环境（推荐使用 venv）
 - 有效的 OpenAI API 密钥或第三方兼容服务
 
-#### 环境搭建步骤
-1. **创建虚拟环境**
-   ```bash
-   python -m venv ai-round-env
-   source ai-round-env/bin/activate  # Linux/Mac
-   # 或 ai-round-env\Scripts\activate  # Windows
-   ```
+#### 开发环境
+- 虚拟环境目录： {PROJECT_ROOT_PATH}/.venv/
+- 依赖： requirements.txt
+- 环境变量： {PROJECT_ROOT_PATH}/.env
 
-2. **安装依赖**
-   ```bash
-   pip install -r requirements.txt
-   ```
-   主要依赖包括：
-   - crewai==0.5.0
-   - fastapi==0.116.1
-   - uvicorn==0.35.0
-   - pydantic==2.11.7
-   - openai==1.101.0
-   - langchain-openai==0.0.2.post1
-
-3. **配置环境变量**
-   创建 `.env` 文件：
-   ```bash
-   OPENAI_API_KEY=your-openai-api-key
-   OPENAI_API_BASE=https://api.openai.com/v1
-   HOST=0.0.0.0
-   PORT=8000
-   DEBUG=True
-   ```
 
 #### 项目结构
 ```
@@ -104,7 +80,6 @@ ai-round/
 ├── main.py                 # FastAPI + CrewAI 服务主文件
 ├── requirements.txt        # 依赖列表
 ├── .env                   # 环境变量配置
-├── .env.example          # 环境变量示例
 ├── AGENTS.md             # AI 项目概况文档
 ├── AI圆桌会MVP技术方案.md # 技术方案文档
 ├── afunc/                # AFunc 框架目录
@@ -254,8 +229,9 @@ pip list
 
 **最后更新**：2025年8月27日
 
-### 已完成功能
+### 功能特性（Features）
 - [ ] **环境搭建**：Python venv + CrewAI + FastAPI 环境配置完成
+- [ ] **依赖管理**：requirements.txt 和 .env 配置完成
 - [ ] **基础框架**：FastAPI 服务框架搭建完成
 - [ ] **单 Agent 实现**：单个 Agent 调用 CrewAI 功能已完成
 - [ ] **API 端点**：/v1/chat/completions 端点已实现
@@ -263,9 +239,6 @@ pip list
 - [ ] **响应格式**：基本 OpenAI 兼容响应格式实现
 - [ ] **错误处理**：基础错误处理和日志记录
 - [ ] **健康检查**：/health 端点实现
-- [ ] **依赖管理**：requirements.txt 和 .env 配置完成
-
-### 待实现功能
 - [ ] **多 Agent 轮流发言**：3个 Agent（领域专家、创意思考者、批判性思考者）按顺序发言
 - [ ] **不同模型支持**：为不同 Agent 配置不同模型（qwen3-coder、glm-4.5）
 - [ ] **角色标识**：返回格式中包含角色名标识 `[角色名]：发言内容`
@@ -287,22 +260,8 @@ pip list
 - 某些边缘情况的错误处理需要完善
 - 性能测试尚未进行
 
-### 下一步计划
-1. **优先级高**：实现多 Agent 轮流发言功能
-2. **优先级高**：完善不同模型的配置和调用
-3. **优先级中**：优化响应格式和角色标识
-4. **优先级中**：添加完整的测试用例
-5. **优先级低**：实现流式输出功能
-6. **优先级低**：性能优化和监控
-
 ### 里程碑计划
 - **MVP v1.0**：基础多 Agent 功能（2周内）
 - **v1.1**：流式输出和性能优化（1个月后）
 - **v1.2**：完整测试覆盖和文档完善（2个月后）
 - **v2.0**：高级功能和扩展（3个月后）
-
-### 贡献指南
-- 欢迎 Issue 反馈和 Pull Request
-- 代码提交前请确保通过所有测试
-- 遵循项目代码规范和文档要求
-- 重大功能变更请先提交 Issue 讨论

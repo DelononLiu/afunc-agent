@@ -4,6 +4,8 @@ bin/
 obj/
 _tmp_workspace/
 ai-round-env
+.venv
+
 
 # OS generated files
 .DS_Store
