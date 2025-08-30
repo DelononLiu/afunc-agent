@@ -12,6 +12,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from crewai import Agent, Task, Crew
 from dotenv import load_dotenv
+import openai
 
 # 加载环境变量
 load_dotenv()
@@ -40,7 +41,11 @@ class ChatCompletionResponse(BaseModel):
     choices: List[Dict[str, Any]]
     usage: Dict[str, int]
 
-# 创建领域专家 Agent
+# 初始化 OpenAI 客户端
+openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.base_url = os.getenv("OPENAI_API_BASE")
+
+# 创建领域专家 Agent (保留用于非LLM任务，但不用于实际的聊天完成)
 domain_expert = Agent(
     role="领域专家",
     goal="提供特定领域的专业知识和见解",
@@ -67,43 +72,36 @@ async def chat_completions(request: ChatCompletionRequest):
         if not user_message:
             raise HTTPException(status_code=400, detail="用户消息不能为空")
         
-        # 创建任务
-        task = Task(
-            description=f"分析用户问题并提供专业回答: {user_message}",
-            agent=domain_expert,
-            expected_output="提供详细、准确的专业回答"
+        # 调用 OpenAI API
+        response = openai.chat.completions.create(
+            model=os.getenv("MODEL_NAME"),
+            messages=[
+                {"role": "system", "content": "你是一个领域专家，提供特定领域的专业知识和见解。"},
+                {"role": "user", "content": user_message}
+            ]
         )
-        
-        # 创建 Crew
-        crew = Crew(
-            agents=[domain_expert],
-            tasks=[task],
-            verbose=2
-        )
-        
-        # 执行任务
-        result = crew.kickoff()
         
         # 构造响应
+        chat_response = response.choices[0].message.content
         response = ChatCompletionResponse(
-            id="cmpl-single-agent",
+            id=response.id,
             object="chat.completion",
-            created=1234567890,  # 实际应用中应使用当前时间戳
-            model=request.model,
+            created=int(response.created),
+            model=response.model,
             choices=[
                 {
                     "index": 0,
                     "message": {
                         "role": "assistant",
-                        "content": f"[领域专家]：{result}"
+                        "content": f"[领域专家]：{chat_response}"
                     },
-                    "finish_reason": "stop"
+                    "finish_reason": response.choices[0].finish_reason
                 }
             ],
             usage={
-                "prompt_tokens": 0,  # 实际应用中应计算真实的 token 数量
-                "completion_tokens": 0,
-                "total_tokens": 0
+                "prompt_tokens": response.usage.prompt_tokens,
+                "completion_tokens": response.usage.completion_tokens,
+                "total_tokens": response.usage.total_tokens
             }
         )
         

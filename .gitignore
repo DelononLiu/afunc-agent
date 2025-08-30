@@ -5,6 +5,7 @@ obj/
 _tmp_workspace/
 ai-round-env
 .venv
+__pycache__/
 
 
 # OS generated files

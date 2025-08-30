@@ -77,7 +77,7 @@
 #### 项目结构
 ```
 ai-round/
-├── main.py                 # FastAPI + CrewAI 服务主文件
+├── agent.py                 # FastAPI + CrewAI 服务主文件
 ├── requirements.txt        # 依赖列表
 ├── .env                   # 环境变量配置
 ├── AGENTS.md             # AI 项目概况文档
@@ -94,10 +94,10 @@ ai-round/
 #### 开发服务器启动
 ```bash
 # 启动 FastAPI 开发服务器
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+.venv/bin/uvicorn agent:app --host 0.0.0.0 --port 8000 --reload
 
 # 或使用 Python 直接运行
-python main.py
+.venv/bin/python agent.py
 ```
 
 #### API 文档访问
@@ -105,24 +105,27 @@ python main.py
 - ReDoc: http://localhost:8000/redoc
 
 #### 测试命令
+
+##### 直接 API 测试 (使用 curl)
+# 这些命令可以直接测试 API 端点，适用于快速验证 API 是否正常工作
+# 注意：复杂功能测试推荐使用下面的脚本测试
 ```bash
 # 健康检查
 curl http://localhost:8000/health
+```
 
-# 测试聊天接口
-curl -X POST "http://localhost:8000/v1/chat/completions" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [{"role": "user", "content": "你好，请介绍一下自己"}],
-    "model": "gpt-3.5-turbo"
-  }'
+##### 完整服务测试 (使用测试脚本)
+# 这个脚本会完整测试服务，包括启动、健康检查、API 测试和停止服务
+```bash
+# 运行单 Agent 服务测试
+.venv/bin/python tests/test_agent_service.py
 ```
 
 #### 调试命令
 ```bash
 # 启用详细日志
 export DEBUG=True
-uvicorn main:app --reload --log-level debug
+uvicorn agent:app --reload --log-level debug
 
 # 查看依赖版本
 pip list
@@ -131,32 +134,11 @@ pip list
 ### 运行与部署 (Running & Deployment)
 
 #### 本地运行
-1. 确保虚拟环境已激活
+1. 激活虚拟环境：`source .venv/bin/activate`
 2. 环境变量已正确配置
-3. 启动服务：`uvicorn main:app --host 0.0.0.0 --port 8000`
+3. 启动服务：`.venv/bin/uvicorn agent:app --host 0.0.0.0 --port 8000`
 4. 访问 http://localhost:8000/health 确认服务正常
 
-#### 生产部署
-1. **使用 Gunicorn + Uvicorn**
-   ```bash
-   pip install gunicorn
-   gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
-   ```
-
-2. **使用 Docker**
-   ```dockerfile
-   FROM python:3.9-slim
-   WORKDIR /app
-   COPY requirements.txt .
-   RUN pip install -r requirements.txt
-   COPY . .
-   CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-   ```
-
-3. **环境变量管理**
-   - 生产环境使用环境变量或配置管理工具
-   - 确保 OPENAI_API_KEY 安全存储
-   - 设置 DEBUG=False
 
 #### Open WebUI 集成
 1. 在 Open WebUI 配置界面设置：
@@ -233,7 +215,7 @@ pip list
 - [ ] **环境搭建**：Python venv + CrewAI + FastAPI 环境配置完成
 - [ ] **依赖管理**：requirements.txt 和 .env 配置完成
 - [ ] **基础框架**：FastAPI 服务框架搭建完成
-- [ ] **单 Agent 实现**：单个 Agent 调用 CrewAI 功能已完成
+- [x] **单 Agent 实现**：单个 Agent 调用 CrewAI 功能已完成
 - [ ] **API 端点**：/v1/chat/completions 端点已实现
 - [ ] **OpenAI 集成**：OpenAI API 客户端集成完成
 - [ ] **响应格式**：基本 OpenAI 兼容响应格式实现
