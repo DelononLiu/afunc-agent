@@ -7,6 +7,7 @@ AI圆桌会单 Agent 实现
 
 import os
 import logging
+import time
 from typing import List, Dict, Any
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -17,6 +18,8 @@ import openai
 # 加载环境变量
 load_dotenv()
 
+# 要加 openai 标识
+model_name = "openai/" + os.getenv("OPENAI_MODEL_NAME", "glm-4.5-air")
 # 配置日志
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -41,18 +44,15 @@ class ChatCompletionResponse(BaseModel):
     choices: List[Dict[str, Any]]
     usage: Dict[str, int]
 
-# 初始化 OpenAI 客户端
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.base_url = os.getenv("OPENAI_API_BASE")
-
-# 创建领域专家 Agent (保留用于非LLM任务，但不用于实际的聊天完成)
+# 创建领域专家 Agent
 domain_expert = Agent(
     role="领域专家",
     goal="提供特定领域的专业知识和见解",
     backstory="""你在特定领域有深厚的知识和经验，能够提供专业建议。
 你能够分析用户的问题，并给出详细、准确的回答。""",
     verbose=True,
-    allow_delegation=False
+    allow_delegation=False,
+    llm=model_name
 )
 
 @app.get("/health")
@@ -72,36 +72,43 @@ async def chat_completions(request: ChatCompletionRequest):
         if not user_message:
             raise HTTPException(status_code=400, detail="用户消息不能为空")
         
-        # 调用 OpenAI API
-        response = openai.chat.completions.create(
-            model=os.getenv("OPENAI_MODEL_NAME"),
-            messages=[
-                {"role": "system", "content": "你是一个领域专家，提供特定领域的专业知识和见解。"},
-                {"role": "user", "content": user_message}
-            ]
+        # 创建任务并使用 domain_expert Agent 执行
+        task = Task(
+            description=f"基于用户输入提供专业回答：{user_message}",
+            expected_output="专业的领域知识和见解",
+            agent=domain_expert
         )
         
+        # 创建 Crew 并执行任务
+        crew = Crew(
+            agents=[domain_expert],
+            tasks=[task],
+            verbose=True
+        )
+        
+        # 执行任务
+        result = crew.kickoff()
+        
         # 构造响应
-        chat_response = response.choices[0].message.content
         response = ChatCompletionResponse(
-            id=response.id,
+            id="domain-expert-response",
             object="chat.completion",
-            created=int(response.created),
-            model=response.model,
+            created=int(time.time()),
+            model=request.model,
             choices=[
                 {
                     "index": 0,
                     "message": {
                         "role": "assistant",
-                        "content": f"[领域专家]：{chat_response}"
+                        "content": f"[领域专家]：{result}"
                     },
-                    "finish_reason": response.choices[0].finish_reason
+                    "finish_reason": "stop"
                 }
             ],
             usage={
-                "prompt_tokens": response.usage.prompt_tokens,
-                "completion_tokens": response.usage.completion_tokens,
-                "total_tokens": response.usage.total_tokens
+                "prompt_tokens": 0,  # 由于使用Agent，无法准确统计token使用
+                "completion_tokens": 0,
+                "total_tokens": 0
             }
         )
         

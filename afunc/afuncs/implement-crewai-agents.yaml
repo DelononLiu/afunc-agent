@@ -18,6 +18,7 @@ outputs:
 constraints:
   - 必须提供有效的 OpenAI API 密钥
   - 确保 Agent 角色定义合理且不冲突
+  - 对于 OpenAI 兼容的 API（如 DeepSeek、GLM 等），模型名称需要添加 "openai/" 前缀，例如 "openai/deepseek-chat" 或 "openai/glm-4.5-air"
 instructions:
   - 根据 agent_configs 创建 Agent 对象，包括 role、goal、backstory 等属性
   - 如果 collaboration_mode 为 "single"，创建单个 Agent 并设置任务
@@ -26,6 +27,8 @@ instructions:
   - 生成 ${code_filepath} 文件，包含 FastAPI 服务和 CrewAI 集成
   - 在 ${code_filepath} 中实现 /chat/completions 端点的初步版本
   - 添加必要的错误处理和日志记录
+  - 在生成的代码中添加模型名称配置：model_name = "openai/" + os.getenv("OPENAI_MODEL_NAME", "deepseek-chat")
+  - 确保 Agent 配置中使用正确的 llm 参数：llm=model_name
   - 将生成的 ${code_filepath} 文件路径设置为输出 agent_py_path
   - 如果 collaboration_mode 为 "single"，那么设置 multi_agent_logic 为 false
   - 如果 collaboration_mode 为 "multi"， 那么设置 multi_agent_logic 为 true
