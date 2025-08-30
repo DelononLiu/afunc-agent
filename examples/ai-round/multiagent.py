@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 AI圆桌会多 Agent 实现
-此文件实现了多个 CrewAI Agent，用于处理用户输入并生成多角色响应。
+此文件实现了多个 CrewAI Agent，用于处理用户输入并生成响应。
 """
 
 import os
@@ -10,21 +10,22 @@ import logging
 import time
 from typing import List, Dict, Any
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from crewai import Agent, Task, Crew, Process
+from crewai import Agent, Task, Crew
 from dotenv import load_dotenv
 import openai
 
 # 加载环境变量
 load_dotenv()
 
+# 要加 openai 标识
+model_name = "openai/" + os.getenv("OPENAI_MODEL_NAME", "glm-4.5-air")
 # 配置日志
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # FastAPI 应用
-app = FastAPI(title="AI圆桌会多 Agent 实现", description="多个 CrewAI Agent 实现，用于处理用户输入并生成多角色响应。")
+app = FastAPI(title="AI圆桌会多 Agent 实现", description="多个 CrewAI Agent 实现，用于处理用户输入并生成响应。")
 
 # 定义数据模型
 class Message(BaseModel):
@@ -43,16 +44,9 @@ class ChatCompletionResponse(BaseModel):
     choices: List[Dict[str, Any]]
     usage: Dict[str, int]
 
-# 初始化 OpenAI 客户端
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.base_url = os.getenv("OPENAI_API_BASE")
-
-# 要加 openai 标识
-model_name = "openai/" + os.getenv("OPENAI_MODEL_NAME", "glm-4.5-air")
-
 # 创建领域专家 Agent
 domain_expert = Agent(
-    role="领域专家1",
+    role="领域专家",
     goal="提供特定领域的专业知识和见解",
     backstory="""你在特定领域有深厚的知识和经验，能够提供专业建议。
 你能够分析用户的问题，并给出详细、准确的回答。""",
@@ -63,10 +57,10 @@ domain_expert = Agent(
 
 # 创建创意思考者 Agent
 creative_thinker = Agent(
-    role="领域专家2",
-    goal="提供特定领域的专业知识和见解",
-    backstory="""你在特定领域有深厚的知识和经验，能够提供专业建议。
-你能够分析用户的问题，并给出详细、准确的回答。""",
+    role="创意思考者",
+    goal="提供创新的思路和解决方案",
+    backstory="""你具有丰富的想象力和创造力，能够从不同角度思考问题，
+提出新颖的观点和解决方案。""",
     verbose=True,
     allow_delegation=False,
     llm=model_name
@@ -74,10 +68,10 @@ creative_thinker = Agent(
 
 # 创建批判性思考者 Agent
 critical_thinker = Agent(
-    role="领域专家3",
-    goal="提供特定领域的专业知识和见解",
-    backstory="""你在特定领域有深厚的知识和经验，能够提供专业建议。
-你能够分析用户的问题，并给出详细、准确的回答。""",
+    role="批判性思考者",
+    goal="对观点进行批判性分析，指出潜在问题",
+    backstory="""你善于批判性思考，能够发现观点中的逻辑漏洞和潜在问题，
+提供客观的分析和改进建议。""",
     verbose=True,
     allow_delegation=False,
     llm=model_name
@@ -91,7 +85,7 @@ async def health_check():
 @app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
 async def chat_completions(request: ChatCompletionRequest):
     """
-    处理聊天完成请求，使用多个 Agent 依次发言
+    处理聊天完成请求
     """
     try:
         # 获取用户最后一条消息
@@ -100,53 +94,54 @@ async def chat_completions(request: ChatCompletionRequest):
         if not user_message:
             raise HTTPException(status_code=400, detail="用户消息不能为空")
         
-        # 为每个 Agent 创建独立的任务
-        tasks = [
-            Task(
-                description=f"请基于以下用户输入进行回答：{user_message}",
-                expected_output="你的专业回答",
-                agent=domain_expert
-            ),
-            Task(
-                description=f"请基于以下用户输入提供创新的想法：{user_message}",
-                expected_output="你的创新想法",
-                agent=creative_thinker
-            ),
-            Task(
-                description=f"请基于以下用户输入进行批判性分析：{user_message}",
-                expected_output="你的批判性分析",
-                agent=critical_thinker
-            )
-        ]
+        # 为每个 Agent 创建独立的 Crew
+        # 领域专家 Crew
+        domain_expert_task = Task(
+            description=f"基于用户输入提供专业回答：{user_message}",
+            expected_output="专业的领域知识和见解",
+            agent=domain_expert
+        )
         
-        # 创建 Crew，使用 sequential 流程让 Agent 们依次执行任务
-        crew = Crew(
-            agents=[domain_expert, creative_thinker, critical_thinker],
-            tasks=tasks,
-            process=Process.sequential,  # 顺序执行
+        domain_expert_crew = Crew(
+            agents=[domain_expert],
+            tasks=[domain_expert_task],
             verbose=True
         )
         
-        # 执行任务
-        try:
-            results = crew.kickoff()
-        except Exception as e:
-            logger.error(f"Crew kickoff 失败: {str(e)}")
-            raise
+        # 创意思考者 Crew
+        creative_thinker_task = Task(
+            description=f"基于用户输入提供创新思路：{user_message}",
+            expected_output="创新的观点和解决方案",
+            agent=creative_thinker
+        )
         
-        # 收集所有 Agent 的回复
-        responses = []
-        agent_names = ["领域专家", "创意思考者", "批判性思考者"]
-        if isinstance(results, list) and len(results) == 3:
-            for i, result in enumerate(results):
-                responses.append(f"[{agent_names[i]}]：{result}")
-        else:
-            # 如果结果不是预期的列表格式，使用原始结果
-            responses.append(f"[领域专家]：{results}")
+        creative_thinker_crew = Crew(
+            agents=[creative_thinker],
+            tasks=[creative_thinker_task],
+            verbose=True
+        )
         
-        final_response = "\n".join(responses)
+        # 批判性思考者 Crew
+        critical_thinker_task = Task(
+            description=f"基于用户输入进行批判性分析：{user_message}",
+            expected_output="批判性分析和改进建议",
+            agent=critical_thinker
+        )
+        
+        critical_thinker_crew = Crew(
+            agents=[critical_thinker],
+            tasks=[critical_thinker_task],
+            verbose=True
+        )
+        
+        # 分别执行每个 Crew 并收集结果
+        domain_expert_result = domain_expert_crew.kickoff()
+        creative_thinker_result = creative_thinker_crew.kickoff()
+        critical_thinker_result = "" #critical_thinker_crew.kickoff()
         
         # 构造响应
+        response_content = f"[领域专家]：{domain_expert_result}\n\n[创意思考者]：{creative_thinker_result}\n\n[批判性思考者]：{critical_thinker_result}"
+        
         response = ChatCompletionResponse(
             id="multi-agent-response",
             object="chat.completion",
@@ -157,13 +152,13 @@ async def chat_completions(request: ChatCompletionRequest):
                     "index": 0,
                     "message": {
                         "role": "assistant",
-                        "content": final_response
+                        "content": response_content
                     },
                     "finish_reason": "stop"
                 }
             ],
             usage={
-                "prompt_tokens": 0,
+                "prompt_tokens": 0,  # 由于使用Agent，无法准确统计token使用
                 "completion_tokens": 0,
                 "total_tokens": 0
             }

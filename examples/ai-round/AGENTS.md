@@ -112,6 +112,9 @@ ai-round/
 ```bash
 # 健康检查
 curl http://localhost:8000/health
+
+# test api
+curl -X POST "http://localhost:8000/v1/chat/completions"   -H "Content-Type: application/json"   -d '{"model": "deepseek-chat", "messages": [{"role": "user", "content": "请一句话介绍一下你自己。（这是不用开启你的专业特长，请直接回答）" }]}'
 ```
 
 ##### 完整服务测试 (使用测试脚本)
