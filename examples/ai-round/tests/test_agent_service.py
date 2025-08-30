@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # 配置
-SERVICE_FILE = "/home/long2015/Code/afunc-agent/examples/ai-round/agent.py"
+SERVICE_FILE = "agent.py"
 SERVICE_PORT = 8000
 HEALTH_ENDPOINT = "/health"
 TEST_ENDPOINT = "/v1/chat/completions"

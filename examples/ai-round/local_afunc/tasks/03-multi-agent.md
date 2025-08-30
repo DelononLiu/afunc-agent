@@ -1,31 +1,30 @@
 # 任务名称：AI圆桌会多 Agent 实现
 
 ## 任务描述
-实现多 Agent 轮流发言，测试返回格式。设计三个通用角色（领域专家、创意思考者、批判性思考者），实现 CrewAI 多 Agent 协作逻辑。
+参考已完成的单 Agent 实现（02任务），实现多 Agent 轮流发言功能。设计三个通用角色（领域专家、创意思考者、批判性思考者），实现 CrewAI 多 Agent 协作逻辑，返回格式为**【角色名】：发言内容**。
 
 ## 任务交付件
-- main.py：更新后的 FastAPI + CrewAI 服务文件，支持多 Agent
-- 多 Agent 轮流发言功能测试通过
-- 返回格式验证通过
+- ${PROJECT_ROOT_PATH}/multiagent.py：参考 agent.py 扩展的多 Agent FastAPI + CrewAI 服务文件
+- ${PROJECT_ROOT_PATH}/tests/test_multiagent_service.py
+
 
 ## 任务 TODO List
-- [ ] 调用 `implement_crewai_agents` afunc，设计三个 Agent（领域专家、创意思考者、批判性思考者）并实现 CrewAI 多 Agent 协作逻辑
-- [ ] 调用 `run_openai_api` afunc，参数：`"请针对 '人工智能的未来' 这一主题，进行一场多专家的圆桌讨论。"`，验证返回是否包含多个 Agent 的观点
+- [ ] 调用 `implement-crewai-agents` AFUNC，输入：code_filepath=${PROJECT_ROOT_PATH}/multiagent.py collaboration_mode=multi agent_configs="领域专家、创意思考者、批判性思考者"
+- [ ] 调用 `generate-service-test-script` AFUNC，输入：service_file=${PROJECT_ROOT_PATH}/multiagent.py output_file=${PROJECT_ROOT_PATH}/tests/test_multiagent_service.py
+- [ ] 调用 `test-agent-service` AFUNC，输入 test_script=${PROJECT_ROOT_PATH}/tests/test_multiagent_service.py
+
 
 ## 验证与反馈
-### 人工审查意见 (可选)
-- 状态：
-- 详细描述：
-
-### 自动化测试报告 (可选)
-- 状态：
-- 详细信息：
+### 自动化测试报告
+- 测试状态：
+- 测试状态：
 
 ## Runtime Context
-```json
-{
-  "agents_configured": false,
-  "multi_agent_logic": false,
-  "sequential_discussion": false,
-  "response_format_valid": false
-}
+PROJECT_ROOT_PATH=(替换为 项目根目录)
+venv_path=${PROJECT_ROOT_PATH}/.venv/
+multiagent_py_path=
+multi_agent_logic=
+
+test_py_path=
+test_status=
+test_output=
