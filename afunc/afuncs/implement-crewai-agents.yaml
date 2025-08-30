@@ -27,5 +27,6 @@ instructions:
   - 在 ${code_filepath} 中实现 /chat/completions 端点的初步版本
   - 添加必要的错误处理和日志记录
   - 将生成的 ${code_filepath} 文件路径设置为输出 agent_py_path
-  - 将多 Agent 逻辑实现状态设置为 true 作为输出 multi_agent_logic
+  - 如果 collaboration_mode 为 "single"，那么设置 multi_agent_logic 为 false
+  - 如果 collaboration_mode 为 "multi"， 那么设置 multi_agent_logic 为 true
   - 更新任务文档的 Runtime Context

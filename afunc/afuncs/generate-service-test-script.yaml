@@ -1,0 +1,49 @@
+func_name: generate-service-test-script
+description: 生成通用的 HTTP 服务测试脚本，支持 FastAPI 或其他 HTTP 服务的自动化测试
+tools: [bash]
+capability: |
+  此 AFunc 能够生成通用的 Python 测试脚本，用于测试 HTTP 服务。脚本包含服务启动、健康检查、API 测试、服务停止等功能，支持自定义端口、端点和测试载荷。
+inputs:
+  - name: service_file
+    description: 服务主文件路径（如 agent.py）
+  - name: output_file
+    description: 输出的测试脚本文件路径，默认为 test_service.py
+    default: test_service.py
+  - name: service_port
+    description: 服务端口，默认为 8000
+    default: 8000
+  - name: health_endpoint
+    description: 健康检查端点路径，默认为 /health
+    default: "/health"
+  - name: test_endpoint
+    description: 主要测试端点路径，默认为 /v1/chat/completions
+    default: "/v1/chat/completions"
+  - name: test_payload
+    description: 测试请求的 JSON 载荷，默认为基本的聊天完成请求
+    default: '{"model": "gpt-3.5-turbo", "messages": [{"role": "user", "content": "你好，请介绍一下你自己"}]}'
+  - name: service_start_command
+    description: 服务启动命令，默认为 python {service_file}
+    default: "python {service_file}"
+outputs:
+  - name: generated_script_path
+    description: 生成的测试脚本文件路径
+  - name: script_content
+    description: 生成的脚本内容预览
+constraints:
+  - 需要 Python 3.7+ 环境
+  - 需要安装 requests 库（测试脚本会检查并尝试安装）
+instructions:
+  - 检查服务文件是否存在
+  - 检查 .env 文件是否存在，如果存在则读取环境变量配置
+  - 生成 Python 测试脚本内容，包含以下功能：
+    * 服务启动（使用 subprocess，正确传递环境变量）
+    * 健康检查
+    * API 端点测试
+    * 服务停止
+    * 错误处理和超时控制
+  - 确保测试脚本能够正确处理 .env 文件中的环境变量
+  - 将生成的脚本写入输出文件
+  - 设置文件可执行权限（如果需要）
+  - 返回生成的脚本路径和内容预览
+  - 在任务文档的 Runtime Context 中更新 test_script_generated 为 "true"
+  - 在任务文档的 Runtime Context 中更新 test_script_path 为输出文件路径

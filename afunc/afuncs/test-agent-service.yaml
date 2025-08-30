@@ -1,0 +1,32 @@
+func_name: test-agent-service
+description: 执行服务测试脚本，验证 FastAPI + CrewAI 服务的功能
+tools: [bash]
+capability: |
+  此 AFunc 能够执行生成的测试脚本，进行服务的自动化测试，包括启动、健康检查、API测试和停止服务。
+inputs:
+  - name: test_script
+    description: 测试脚本路径，由 generate-service-test-script AFUNC 生成
+  - name: python_command
+    description: Python 解释器命令，默认为 python
+    default: python
+outputs:
+  - name: test_status
+    description: 测试执行状态，"success" 或 "error"
+  - name: test_output
+    description: 测试脚本的输出结果
+  - name: exit_code
+    description: 测试脚本的退出码
+constraints:
+  - 需要 Python 3.7+ 环境
+  - 测试脚本必须存在且可执行
+  - 需要安装测试脚本所需的依赖（如 requests）
+instructions:
+  - 检查测试脚本是否存在
+  - 执行测试脚本：`{python_command} {test_script}`
+  - 捕获测试脚本的输出和退出码
+  - 如果退出码为 0，设置 test_status 为 "success"
+  - 如果退出码不为 0，设置 test_status 为 "error"
+  - 设置 test_output 为脚本输出内容
+  - 设置 exit_code 为脚本退出码
+  - 在任务文档的 Runtime Context 中更新 agent_test_result 为 test_output
+  - 在任务文档的 Runtime Context 中更新 service_test_status 为 test_status
