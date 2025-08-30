@@ -74,7 +74,7 @@ async def chat_completions(request: ChatCompletionRequest):
         
         # 调用 OpenAI API
         response = openai.chat.completions.create(
-            model=os.getenv("MODEL_NAME"),
+            model=os.getenv("OPENAI_MODEL_NAME"),
             messages=[
                 {"role": "system", "content": "你是一个领域专家，提供特定领域的专业知识和见解。"},
                 {"role": "user", "content": user_message}
