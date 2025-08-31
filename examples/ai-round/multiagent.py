@@ -89,7 +89,7 @@ async def list_models():
     # 为了简化，我们返回一个固定的模型列表
     models = [
         {
-            "id": os.getenv("OPENAI_MODEL_NAME", "glm-4.5-air"),
+            "id": "ai-rould",
             "object": "model",
             "created": int(time.time()),
             "owned_by": "ai-round"
@@ -109,8 +109,7 @@ async def chat_completions(request: ChatCompletionRequest):
         if not user_message:
             raise HTTPException(status_code=400, detail="用户消息不能为空")
         
-        # 为每个 Agent 创建独立的 Crew
-        # 领域专家 Crew
+        # 先执行领域专家
         domain_expert_task = Task(
             description=f"基于用户输入提供专业回答：{user_message}",
             expected_output="专业的领域知识和见解",
@@ -123,9 +122,11 @@ async def chat_completions(request: ChatCompletionRequest):
             verbose=True
         )
         
-        # 创意思考者 Crew
+        domain_expert_result = domain_expert_crew.kickoff()
+        
+        # 然后基于领域专家的输出执行创意思考者
         creative_thinker_task = Task(
-            description=f"基于用户输入提供创新思路：{user_message}",
+            description=f"基于用户输入提供专业回答：{user_message}\n\n[领域专家]：{domain_expert_result}",
             expected_output="创新的观点和解决方案",
             agent=creative_thinker
         )
@@ -136,9 +137,11 @@ async def chat_completions(request: ChatCompletionRequest):
             verbose=True
         )
         
-        # 批判性思考者 Crew
+        creative_thinker_result = creative_thinker_crew.kickoff()
+        
+        # 然后基于创意思考者的输出执行批判性思考者
         critical_thinker_task = Task(
-            description=f"基于用户输入进行批判性分析：{user_message}",
+            description=f"基于用户输入提供专业回答：{user_message}\n\n[领域专家]：{domain_expert_result}\n\n[创意思考者]：{creative_thinker_result}",
             expected_output="批判性分析和改进建议",
             agent=critical_thinker
         )
@@ -149,11 +152,8 @@ async def chat_completions(request: ChatCompletionRequest):
             verbose=True
         )
         
-        # 分别执行每个 Crew 并收集结果
-        domain_expert_result = domain_expert_crew.kickoff()
-        creative_thinker_result = creative_thinker_crew.kickoff()
         critical_thinker_result = critical_thinker_crew.kickoff()
-        
+                
         # 构造响应
         response_content = f"[领域专家]：{domain_expert_result}\n\n[创意思考者]：{creative_thinker_result}\n\n[批判性思考者]：{critical_thinker_result}"
         

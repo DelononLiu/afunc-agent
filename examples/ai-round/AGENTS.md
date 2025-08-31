@@ -117,6 +117,10 @@ curl http://localhost:8000/health
 curl -X POST "http://localhost:8000/v1/chat/completions"   -H "Content-Type: application/json"   -d '{"model": "deepseek-chat", "messages": [{"role": "user", "content": "请一句话介绍一下你自己。（这是不用开启你的专业特长，请直接回答）" }]}'
 ```
 
+# test multiagent
+curl -X POST "http://localhost:8000/v1/chat/completions"   -H "Content-Type: application/json"   -d '{"model": "deepseek-chat", "messages": [{"role": "user", "content": "现在我们玩报数的游戏。请按顺序依次报数。注意：不要思考其他东西。这个就是一个简单的报数游戏。只需要继续回复数字即可。（特别提醒“批判性思考者”，直接报出数字即可）\n\n我先来：\n\n23" }]}'
+
+
 ##### 完整服务测试 (使用测试脚本)
 # 这个脚本会完整测试服务，包括启动、健康检查、API 测试和停止服务
 ```bash
@@ -243,6 +247,8 @@ pip list
 
 ### 已知问题
 - [x] 多 Agent 性能问题：批判性思考者响应较慢。 ==> 经过测试，三个Agent总响应时间约15秒，性能表现可接受。响应时间与回答长度相关，属于正常范围。
+- [x] Agent之间信息不通：当前实现中每个Agent独立运行，缺乏信息传递机制，无法实现真正的协作（如报数游戏中的顺序依赖） ==> 已通过顺序执行和输出传递解决
+- [ ] 多轮对话上下文丢失：每次请求只处理最后一条消息，丢失了对话历史，无法进行连贯的多轮对话
 
 ### 里程碑计划
 - **MVP v1.0**：基础多 Agent 功能（2周内）
