@@ -137,7 +137,7 @@ async def chat_completions(request: ChatCompletionRequest):
         # 分别执行每个 Crew 并收集结果
         domain_expert_result = domain_expert_crew.kickoff()
         creative_thinker_result = creative_thinker_crew.kickoff()
-        critical_thinker_result = "" #critical_thinker_crew.kickoff()
+        critical_thinker_result = critical_thinker_crew.kickoff()
         
         # 构造响应
         response_content = f"[领域专家]：{domain_expert_result}\n\n[创意思考者]：{creative_thinker_result}\n\n[批判性思考者]：{critical_thinker_result}"
