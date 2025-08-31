@@ -82,6 +82,21 @@ async def health_check():
     """健康检查端点"""
     return {"status": "ok"}
 
+@app.get("/v1/models")
+async def list_models():
+    """列出可用的模型"""
+    # 这里应该返回实际可用的模型列表
+    # 为了简化，我们返回一个固定的模型列表
+    models = [
+        {
+            "id": os.getenv("OPENAI_MODEL_NAME", "glm-4.5-air"),
+            "object": "model",
+            "created": int(time.time()),
+            "owned_by": "ai-round"
+        }
+    ]
+    return {"object": "list", "data": models}
+
 @app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
 async def chat_completions(request: ChatCompletionRequest):
     """

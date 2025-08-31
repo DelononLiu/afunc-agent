@@ -225,6 +225,8 @@ pip list
 - [x] **错误处理**：基础错误处理和日志记录
 - [x] **健康检查**：/health 端点实现
 - [x] **多 Agent 轮流发言**：3个 Agent（领域专家、创意思考者、批判性思考者）按顺序发言
+- [x] **API 封装**：实现 OpenAI 兼容的 API 端点（/v1/chat/completions 和 /v1/models）
+- [x] **API 测试**：完成 OpenAI 兼容 API 的自动化测试
 - [ ] **不同模型支持**：为不同 Agent 配置不同模型（qwen3-coder、glm-4.5）
 - [x] **角色标识**：返回格式中包含角色名标识 `[角色名]：发言内容`
 - [ ] **任务协作**：CrewAI Task 协作流程优化
