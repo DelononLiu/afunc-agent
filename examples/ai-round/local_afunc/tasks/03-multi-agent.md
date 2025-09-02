@@ -16,21 +16,20 @@
 
 ## 任务 TODO List
 - [ ] 调用 `implement-crewai-agents` AFUNC，输入：code_filepath=${PROJECT_ROOT_PATH}/multiagent.py collaboration_mode=multi_crew agent_configs="领域专家、创意思考者、批判性思考者"
-- [ ] 调用 `generate-service-test-script` AFUNC，输入：service_file=${PROJECT_ROOT_PATH}/multiagent.py output_file=${PROJECT_ROOT_PATH}/tests/test_multiagent_service.py
+- [ ] 调用 `generate-service-test-script` AFUNC，输入：service_file=${PROJECT_ROOT_PATH}/multiagent.py output_file=${PROJECT_ROOT_PATH}/tests/test_multiagent_service.py  启动service超时时间为30秒
 - [ ] 调用 `test-agent-service` AFUNC，输入 test_script=${PROJECT_ROOT_PATH}/tests/test_multiagent_service.py test_api的请求timeout=180
 
-
-## 验证与反馈
-### 自动化测试报告
-- 测试状态：
-- 测试状态：
-
-## Runtime Context
+## 任务 Context
 PROJECT_ROOT_PATH=(替换为 项目根目录)
 venv_path=${PROJECT_ROOT_PATH}/.venv/
 multiagent_py_path=
 multi_agent_logic=
 
-test_py_path=
-test_status=
-test_output=
+### 自动化测试
+### 测试用例
+- 用例1： 测试接口健康
+- 用例2： 用例："现在我们玩报数的游戏。请按顺序依次报数。注意：不要思考其他东西。这个就是一个简单的报数游戏。只需要继续回复数字即可。输出内容格式示例：\"报数: 23\"。我先来：\n\n报数: 23"
+
+### 测试结果
+- 测试状态：
+- 测试状态：

@@ -19,6 +19,7 @@ constraints:
   - 必须提供有效的 OpenAI API 密钥
   - 确保 Agent 角色定义合理且不冲突
   - 对于 OpenAI 兼容的 API（如 DeepSeek、GLM 等），模型名称需要添加 "openai/" 前缀，例如 "openai/deepseek-chat" 或 "openai/glm-4.5-air"
+  - 必须在应用启动时加载`.env`环境变量文件（使用 dotenv）
 instructions:
   - 根据 agent_configs 创建 Agent 对象，包括 role、goal、backstory 等属性
   - 如果 collaboration_mode 为 "single"，创建单个 Agent 并设置任务
