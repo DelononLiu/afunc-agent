@@ -1,0 +1,1 @@
+rm afunc .roo .roomodes; ln -s ../../afunc/ afunc; ln -s ../../.roo .roo; ln -s ../../.roomodes .roomodes
