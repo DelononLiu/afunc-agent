@@ -1,0 +1,160 @@
+body {
+    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 侧边栏样式 - 专为PC大屏优化 */
+.sidebar {
+    background-color: #ffffff;
+    min-height: 100vh;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+/* 主内容区域样式 - 最大化数据展示空间 */
+.main-content {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.filter-section {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* 图表容器样式 - 最大化显示空间 */
+.chart-container {
+    position: relative;
+    height: 500px;
+    margin-top: 1rem;
+}
+
+.data-table {
+    margin-top: 1rem;
+    font-size: 14px;
+}
+
+.data-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding: 1rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.data-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.loading-spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+/* 统计卡片样式 - 优化大屏显示 */
+.metric-card {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #0d6efd;
+    transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+/* 顶部导航样式 */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.navbar h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #212529;
+}
+
+/* 按钮样式优化 */
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 筛选器样式 */
+.form-control, .form-select {
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* 滑块样式 */
+.form-range {
+    height: 0.5rem;
+}
+
+.form-range::-webkit-slider-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: #0d6efd;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* 复选框样式 */
+.form-check-input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.25rem;
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #495057;
+}
