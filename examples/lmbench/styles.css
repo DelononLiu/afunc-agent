@@ -158,3 +158,97 @@ body {
     font-weight: 500;
     color: #495057;
 }
+
+/* 区分输入属性和性能数据的颜色样式 */
+.input-attribute {
+    background-color: #e3f2fd;
+    font-weight: 500;
+}
+
+.performance-data {
+    background-color: #fff3e0;
+    font-weight: 500;
+}
+
+/* 不同框架的性能数据颜色区分 */
+.framework-tensorrt {
+    background-color: #e3f2fd;
+}
+
+.framework-vllm {
+    background-color: #f1f8e9;
+}
+
+.framework-llamacpp {
+    background-color: #fff3e0;
+}
+
+.framework-mlc {
+    background-color: #fce4ec;
+}
+
+.framework-onnx {
+    background-color: #e8f5e8;
+}
+
+.framework-pytorch {
+    background-color: #fff0f0;
+}
+
+/* 响应式设计优化 */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        max-width: none;
+        min-width: auto;
+        height: auto;
+        position: relative;
+    }
+    
+    .main-content {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .metric-card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .metric-value {
+        font-size: 1.5rem;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+}
+
+/* 加载状态样式 */
+.loading-spinner.show {
+    display: block;
+}
+
+/* 表格行样式优化 */
+.data-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* 筛选器标签样式 */
+.filter-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+/* 按钮组样式 */
+.btn-group {
+    margin-bottom: 1rem;
+}
+
+/* 卡片标题样式 */
+.card-title {
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 1rem;
+}
