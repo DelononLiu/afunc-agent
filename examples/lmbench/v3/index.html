@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大模型性能基准测试数据展示系统</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tabulator CSS -->
+    <link href="https://unpkg.com/tabulator-tables@5.4.4/dist/css/tabulator.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white">
+    <!-- 主容器 -->
+    <div class="flex flex-col min-h-screen pt-16">
+        <!-- 顶部导航栏 -->
+        <header class="bg-blue-600 text-white p-4 shadow-md fixed top-0 left-0 right-0 z-50">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-xl font-bold">大模型性能基准测试数据展示系统</h1>
+                <div class="flex space-x-2">
+                    <button id="compareBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg">
+                        <i class="fas fa-chart-bar mr-2"></i>对比分析
+                    </button>
+                    <button id="exportBtn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg">
+                        <i class="fas fa-download mr-2"></i>导出数据
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区域 -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- 左侧筛选面板 -->
+            <div class="w-1/4 bg-gray-50 border-r border-gray-200 fixed h-screen filter-panel-compact top-16">
+                <!-- 数据加载区域 -->
+                <div class="mb-3 filter-section">
+                    <h2 class="filter-title text-gray-800">数据加载</h2>
+                    <div class="flex flex-col space-y-1">
+                        <input type="file" id="fileInput" accept=".json" class="border border-gray-300 rounded filter-input">
+                        <button id="loadBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg filter-button">
+                            <i class="fas fa-upload mr-1"></i>加载数据
+                        </button>
+                        <button id="loadSampleBtn" class="bg-purple-500 hover:bg-purple-700 text-white font-bold rounded transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg filter-button">
+                            <i class="fas fa-database mr-1"></i>加载示例数据
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 模型筛选区域 -->
+                <div class="mb-3 filter-section">
+                    <h2 class="filter-title text-gray-800">模型筛选</h2>
+                    <select id="modelFilter" class="w-full border border-gray-300 rounded filter-input">
+                        <option value="">所有模型</option>
+                    </select>
+                </div>
+
+                <!-- 框架筛选区域 -->
+                <div class="mb-3 filter-section">
+                    <h2 class="filter-title text-gray-800">框架筛选</h2>
+                    <select id="frameworkFilter" class="w-full border border-gray-300 rounded filter-input">
+                        <option value="">所有框架</option>
+                    </select>
+                </div>
+
+                <!-- 输入序列长度筛选区域 -->
+                <div class="mb-3 filter-section">
+                    <h2 class="filter-title text-gray-800">输入序列长度</h2>
+                    <div class="filter-slider-container">
+                        <input type="range" id="inputSeqSlider" min="0" max="4096" value="0" class="w-full slider">
+                        <div class="flex justify-between text-xs text-gray-600 filter-slider-value">
+                            <span>0</span>
+                            <span id="inputSeqValue">0</span>
+                            <span>4096</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 输出序列长度筛选区域 -->
+                <div class="mb-3 filter-section">
+                    <h2 class="filter-title text-gray-800">输出序列长度</h2>
+                    <div class="filter-slider-container">
+                        <input type="range" id="outputSeqSlider" min="0" max="2048" value="0" class="w-full slider">
+                        <div class="flex justify-between text-xs text-gray-600 filter-slider-value">
+                            <span>0</span>
+                            <span id="outputSeqValue">0</span>
+                            <span>2048</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 指标筛选区域 -->
+                <div class="mb-3 filter-section">
+                    <h2 class="filter-title text-gray-800">显示指标</h2>
+                    <div class="space-y-1">
+                        <label class="flex items-center filter-checkbox-label">
+                            <input type="checkbox" id="prefillTimeCheck" checked class="mr-1 filter-input">
+                            <span>Prefill耗时(ms)</span>
+                        </label>
+                        <label class="flex items-center filter-checkbox-label">
+                            <input type="checkbox" id="decodeTimeCheck" checked class="mr-1 filter-input">
+                            <span>Decode耗时(ms)</span>
+                        </label>
+                        <label class="flex items-center filter-checkbox-label">
+                            <input type="checkbox" id="totalTimeCheck" checked class="mr-1 filter-input">
+                            <span>总耗时(ms)</span>
+                        </label>
+                        <label class="flex items-center filter-checkbox-label">
+                            <input type="checkbox" id="tokenPerSecondCheck" checked class="mr-1 filter-input">
+                            <span>Token/s</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 重置筛选按钮 -->
+                <button id="resetFilterBtn" class="w-full bg-gray-500 hover:bg-gray-700 text-white font-bold rounded transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg filter-button">
+                    <i class="fas fa-redo mr-1"></i>重置筛选
+                </button>
+            </div>
+
+            <!-- 右侧主内容区域 -->
+            <div class="w-3/4 p-6 overflow-y-auto ml-auto">
+                <!-- 统计信息卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-gray-100 rounded-lg shadow p-4 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                        <h3 class="text-gray-600 text-sm">总测试数</h3>
+                        <p id="totalTests" class="text-2xl font-bold text-gray-800">0</p>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg shadow p-4 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                        <h3 class="text-gray-600 text-sm">平均Prefill耗时</h3>
+                        <p id="avgPrefillTime" class="text-2xl font-bold text-gray-800">0 ms</p>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg shadow p-4 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                        <h3 class="text-gray-600 text-sm">平均Decode耗时</h3>
+                        <p id="avgDecodeTime" class="text-2xl font-bold text-gray-800">0 ms</p>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg shadow p-4 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                        <h3 class="text-gray-60 text-sm">平均Token/s</h3>
+                        <p id="avgTokenPerSecond" class="text-2xl font-bold text-gray-800">0</p>
+                    </div>
+                </div>
+
+                <!-- 数据表格 -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">性能数据</h2>
+                        <div class="flex space-x-2">
+                            <input type="text" id="tableSearch" placeholder="搜索..." class="border border-gray-300 rounded px-3 py-1">
+                            <button id="searchBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="data-table" class="border border-gray-300 rounded"></div>
+                </div>
+
+                <!-- 对比分析图表 -->
+                <div id="chartsContainer" class="hidden">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">对比分析</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg shadow p-4" style="height: 400px;">
+                            <h3 class="text-lg font-semibold mb-3 text-gray-800">不同框架性能对比</h3>
+                            <canvas id="frameworkChart" class="chart-canvas"></canvas>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-4" style="height: 400px;">
+                            <h3 class="text-lg font-semibold mb-3 text-gray-800">不同模型性能对比</h3>
+                            <canvas id="modelChart" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alpine.js -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <!-- Tabulator JS -->
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.4.4/dist/js/tabulator.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="common.js"></script>
+    <script src="sampleData.js"></script>
+    <script src="dataHandler.js"></script>
+    <script src="filterChart.js"></script>
+    <script src="dataExport.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

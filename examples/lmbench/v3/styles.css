@@ -1,0 +1,268 @@
+/* 自定义样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 顶部导航栏 */
+header {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+/* 统计信息卡片 */
+.stat-card {
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 数据表格 */
+#data-table {
+    border-radius: 0.25rem;
+}
+
+/* 图表容器 */
+.chart-container {
+    position: relative;
+    height: 450px;
+    width: 100%;
+}
+
+.chart-canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        height: 300px;
+    }
+}
+
+/* 按钮样式 */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 筛选面板 */
+.filter-panel {
+    min-height: 100vh;
+    padding: 0.125rem;
+}
+
+/* 固定筛选面板 */
+.fixed-filter-panel {
+    position: fixed;
+    height: calc(100vh - 64px);
+    width: 25%; /* 1/4 width */
+    top: 64px;
+}
+
+/* 筛选器部分 */
+.filter-section {
+    margin-bottom: 0.25rem;
+}
+
+/* 主内容区域 */
+.main-content {
+    padding: 1.5rem;
+}
+
+/* 表格单元格 */
+.tabulator-cell {
+    padding: 0.75rem !important;
+}
+
+/* 滑块样式 */
+.slider {
+    width: 100%;
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    background: #d1d5db;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+}
+
+/* 下拉选择框 */
+select {
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: 0;
+}
+
+/* 文件输入框 */
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #4b5563;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input[type="file"]:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: 0;
+}
+
+/* 复选框 */
+input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    color: #3b82f6;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input[type="checkbox"]:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: 0;
+}
+
+/* 滑块容器 */
+.slider-container {
+    padding: 0.125rem;
+}
+
+/* 搜索框 */
+#tableSearch {
+    width: 200px;
+    border-radius: 0.25rem;
+    border: 1px solid #d1d5db;
+    padding: 0.5rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#tableSearch:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: 0;
+}
+
+/* 搜索按钮 */
+#searchBtn {
+    transition: all 0.3s ease;
+}
+
+#searchBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .filter-panel {
+        width: 30%;
+    }
+    
+    .main-content {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-panel {
+        width: 100%;
+        min-height: auto;
+    }
+    
+    .main-content {
+        width: 100%;
+    }
+    
+    .stat-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-panel {
+        padding: 0.5rem;
+    }
+    
+    .main-content {
+        padding: 1rem;
+    }
+}
+
+/* 左侧筛选面板紧凑布局 */
+.filter-panel-compact {
+    padding: 0.5rem;
+}
+
+.filter-panel-compact .filter-section {
+    margin-bottom: 0.5rem;
+}
+
+.filter-panel-compact .filter-title {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.filter-panel-compact .filter-input {
+    padding: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.filter-panel-compact .filter-button {
+    padding: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.filter-panel-compact .filter-checkbox-label {
+    font-size: 0.875rem;
+}
+
+.filter-panel-compact .filter-slider-container {
+    padding: 0.125rem;
+}
+
+.filter-panel-compact .filter-slider-value {
+    font-size: 0.75rem;
+}
