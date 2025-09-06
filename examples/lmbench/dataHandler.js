@@ -135,8 +135,12 @@ function toggleColumns() {
     const showTotal = document.getElementById('showTotal').checked;
     const showTPS = document.getElementById('showTPS').checked;
     
-    // 这里需要根据列索引来切换列的显示
+    // 根据列索引切换列的显示
     // DataTables API可以用来控制列的显示
+    dataTable.column(4).visible(showPrefill);
+    dataTable.column(5).visible(showDecode);
+    dataTable.column(6).visible(showTotal);
+    dataTable.column(7).visible(showTPS);
 }
 
 // 重置筛选

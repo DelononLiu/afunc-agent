@@ -17,7 +17,19 @@ function initializeDataTable() {
         pageLength: 10,
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/zh.json'
-        }
+        },
+        columns: [
+            { title: '模型' },
+            { title: '框架' },
+            { title: '输入序列' },
+            { title: '输出序列' },
+            { title: 'Prefill (ms)' },
+            { title: 'Decode (ms)' },
+            { title: '总耗时 (ms)' },
+            { title: 'Token/s' },
+            { title: '内存 (MB)' },
+            { title: '吞吐量' }
+        ]
     });
 }
 

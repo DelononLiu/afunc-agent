@@ -7,25 +7,23 @@ body {
 .sidebar {
     background-color: #ffffff;
     min-height: 100vh;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    height: 100vh;
-    overflow-y: auto;
-    z-index: 1000;
+    box-shadow: 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    padding: 0.125rem !important;
 }
 
 /* 主内容区域样式 - 最大化数据展示空间 */
 .main-content {
     background-color: #ffffff;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    min-height: 100vh;
-    padding: 2rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0.075);
+    margin-bottom: 0.5rem;
+    padding: 1.5rem !important;
 }
 
 .filter-section {
     border-bottom: 1px solid #dee2e6;
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .filter-section:last-child {
@@ -36,25 +34,23 @@ body {
 /* 图表容器样式 - 最大化显示空间 */
 .chart-container {
     position: relative;
-    height: 500px;
+    height: 450px;
     margin-top: 1rem;
 }
 
 .data-table {
-    margin-top: 1rem;
     font-size: 14px;
+    margin-top: 1.5rem;
 }
 
 .data-table th {
     background-color: #f8f9fa;
     font-weight: 600;
-    padding: 1rem;
-    border-bottom: 2px solid #dee2e6;
+    padding: 0.75rem;
 }
 
 .data-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem;
 }
 
 .loading-spinner {
@@ -69,11 +65,10 @@ body {
 /* 统计卡片样式 - 优化大屏显示 */
 .metric-card {
     background-color: #f8f9fa;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-left: 4px solid #0d6efd;
-    transition: transform 0.2s ease;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid #0d6efd;
 }
 
 .metric-card:hover {
@@ -82,15 +77,15 @@ body {
 }
 
 .metric-value {
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-weight: bold;
     color: #0d6efd;
 }
 
 .metric-label {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: #6c757d;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
 }
 
 /* 顶部导航样式 */
@@ -102,17 +97,18 @@ body {
 }
 
 .navbar h1 {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: #212529;
 }
 
 /* 按钮样式优化 */
 .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.375rem 0.75rem;
     font-weight: 500;
     border-radius: 0.375rem;
     transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
 }
 
 .btn:hover {
@@ -124,8 +120,16 @@ body {
 .form-control, .form-select {
     border: 1px solid #ced4da;
     border-radius: 0.375rem;
-    padding: 0.75rem;
+    padding: 0.5rem;
     transition: border-color 0.2s ease;
+}
+
+/* 筛选器下拉框样式 */
+.filter-select {
+    width: 100%;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
 }
 
 .form-control:focus, .form-select:focus {
@@ -135,12 +139,12 @@ body {
 
 /* 滑块样式 */
 .form-range {
-    height: 0.5rem;
+    height: 0.4rem;
 }
 
 .form-range::-webkit-slider-thumb {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
     background-color: #0d6efd;
     border: 0;
     border-radius: 50%;
@@ -149,14 +153,15 @@ body {
 
 /* 复选框样式 */
 .form-check-input {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
     margin-top: 0.25rem;
 }
 
 .form-check-label {
     font-weight: 500;
     color: #495057;
+    margin-bottom: 0.25rem;
 }
 
 /* 区分输入属性和性能数据的颜色样式 */
@@ -234,10 +239,14 @@ body {
     background-color: #f8f9fa;
 }
 
+.table-responsive {
+    margin-top: 1rem;
+}
+
 /* 筛选器标签样式 */
 .filter-label {
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     color: #495057;
 }
 
@@ -250,5 +259,5 @@ body {
 .card-title {
     font-weight: 600;
     color: #212529;
-    margin-bottom: 1rem;
+    margin-bottom: 0.125rem;
 }
