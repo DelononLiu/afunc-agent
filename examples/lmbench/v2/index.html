@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大模型性能基准测试数据展示系统</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 左侧筛选面板 -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="sidebar-sticky pt-3">
+                    <h5 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>数据筛选</span>
+                    </h5>
+                    
+                    <!-- 数据加载区域 -->
+                    <div class="px-3 py-2">
+                        <h6>数据加载</h6>
+                        <div class="mb-3">
+                            <label for="dataFile" class="form-label">选择数据文件</label>
+                            <input class="form-control" type="file" id="dataFile" accept=".json">
+                        </div>
+                        <button id="loadDataBtn" class="btn btn-primary btn-sm w-100 mb-2">
+                            <i class="fas fa-file-upload"></i> 加载数据
+                        </button>
+                        <button id="loadSampleBtn" class="btn btn-secondary btn-sm w-100">
+                            <i class="fas fa-database"></i> 加载示例数据
+                        </button>
+                    </div>
+                    
+                    <!-- 模型筛选区域 -->
+                    <div class="px-3 py-2">
+                        <h6>模型筛选</h6>
+                        <select id="modelFilter" class="form-select form-select-sm">
+                            <option value="">所有模型</option>
+                        </select>
+                    </div>
+                    
+                    <!-- 框架筛选区域 -->
+                    <div class="px-3 py-2">
+                        <h6>框架筛选</h6>
+                        <select id="frameworkFilter" class="form-select form-select-sm">
+                            <option value="">所有框架</option>
+                        </select>
+                    </div>
+                    
+                    <!-- 序列长度筛选区域 -->
+                    <div class="px-3 py-2">
+                        <h6>序列长度筛选</h6>
+                        <div class="mb-2">
+                            <label for="inputSeqMin" class="form-label">输入序列长度</label>
+                            <div class="d-flex justify-content-between">
+                                <span id="inputSeqMinValue">0</span>
+                                <span id="inputSeqMaxValue">0</span>
+                            </div>
+                            <input type="range" class="form-range" id="inputSeqMin" min="0" max="10000" value="0">
+                            <input type="range" class="form-range" id="inputSeqMax" min="0" max="10000" value="10000">
+                        </div>
+                        <div class="mb-2">
+                            <label for="outputSeqMin" class="form-label">输出序列长度</label>
+                            <div class="d-flex justify-content-between">
+                                <span id="outputSeqMinValue">0</span>
+                                <span id="outputSeqMaxValue">0</span>
+                            </div>
+                            <input type="range" class="form-range" id="outputSeqMin" min="0" max="1000" value="0">
+                            <input type="range" class="form-range" id="outputSeqMax" min="0" max="10000" value="10000">
+                        </div>
+                    </div>
+                    
+                    <!-- 指标筛选区域 -->
+                    <div class="px-3 py-2">
+                        <h6>显示指标</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="showPrefill" checked>
+                            <label class="form-check-label" for="showPrefill">Prefill耗时(ms)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="showDecode" checked>
+                            <label class="form-check-label" for="showDecode">Decode耗时(ms)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="showTotal" checked>
+                            <label class="form-check-label" for="showTotal">总耗时(ms)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="showTokens" checked>
+                            <label class="form-check-label" for="showTokens">Token/s</label>
+                        </div>
+                    </div>
+                    
+                    <!-- 重置筛选按钮 -->
+                    <div class="px-3 py-2">
+                        <button id="resetFiltersBtn" class="btn btn-outline-secondary btn-sm w-100">
+                            <i class="fas fa-sync-alt"></i> 重置筛选
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧主内容区域 -->
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- 顶部导航 -->
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">大模型性能基准测试数据展示系统</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button id="toggleChartsBtn" class="btn btn-sm btn-outline-secondary me-2">
+                            <i class="fas fa-chart-bar"></i> 对比分析
+                        </button>
+                        <button id="exportDataBtn" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-download"></i> 导出数据
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 统计信息卡片 -->
+                <div class="row mb-4" id="statsContainer">
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">总测试数</h5>
+                                <p class="card-text display-6" id="totalTests">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">平均Prefill耗时</h5>
+                                <p class="card-text display-6" id="avgPrefill">0 ms</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">平均Decode耗时</h5>
+                                <p class="card-text display-6" id="avgDecode">0 ms</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">平均Token/s</h5>
+                                <p class="card-text display-6" id="avgTokens">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 数据表格 -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">性能数据详情</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="dataTable" class="table table-striped table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>模型名称</th>
+                                        <th>模型版本</th>
+                                        <th>推理框架</th>
+                                        <th>框架版本</th>
+                                        <th>硬件</th>
+                                        <th>输入序列</th>
+                                        <th>输出序列</th>
+                                        <th>Prefill耗时(ms)</th>
+                                        <th>Decode耗时(ms)</th>
+                                        <th>总耗时(ms)</th>
+                                        <th>Token/s</th>
+                                        <th>内存使用(MB)</th>
+                                        <th>吞吐量</th>
+                                        <th>时间戳</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 对比分析图表 -->
+                <div id="chartsContainer" class="row mb-4" style="display: none;">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">框架性能对比</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="frameworkChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">模型性能对比</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="modelChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom JS Modules -->
+    <script src="common.js"></script>
+    <script src="sampleData.js"></script>
+    <script src="dataHandler.js"></script>
+    <script src="filterChart.js"></script>
+    <script src="dataExport.js"></script>
+    
+    <!-- Main Script -->
+    <script>
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化数据处理器
+            window.dataHandler = new DataHandler();
+            
+            // 初始化筛选和图表模块
+            window.filterChart = new FilterChart();
+            
+            // 初始化数据导出模块
+            window.dataExport = new DataExport();
+            
+            // 绑定事件
+            bindEvents();
+            
+            // 初始化DataTable
+            initializeDataTable();
+        });
+        
+        // 绑定事件
+        function bindEvents() {
+            // 数据加载按钮
+            document.getElementById('loadDataBtn').addEventListener('click', function() {
+                const fileInput = document.getElementById('dataFile');
+                if (fileInput.files.length > 0) {
+                    window.dataHandler.loadFromFile(fileInput.files[0]);
+                } else {
+                    alert('请选择一个JSON文件');
+                }
+            });
+            
+            // 加载示例数据按钮
+            document.getElementById('loadSampleBtn').addEventListener('click', function() {
+                window.dataHandler.loadSampleData();
+            });
+            
+            // 模型筛选
+            document.getElementById('modelFilter').addEventListener('change', function() {
+                window.filterChart.applyFilters();
+            });
+            
+            // 框架筛选
+            document.getElementById('frameworkFilter').addEventListener('change', function() {
+                window.filterChart.applyFilters();
+            });
+            
+            // 序列长度筛选
+            document.getElementById('inputSeqMin').addEventListener('input', function() {
+                document.getElementById('inputSeqMinValue').textContent = this.value;
+                window.filterChart.applyFilters();
+            });
+            
+            document.getElementById('inputSeqMax').addEventListener('input', function() {
+                document.getElementById('inputSeqMaxValue').textContent = this.value;
+                window.filterChart.applyFilters();
+            });
+            
+            document.getElementById('outputSeqMin').addEventListener('input', function() {
+                document.getElementById('outputSeqMinValue').textContent = this.value;
+                window.filterChart.applyFilters();
+            });
+            
+            document.getElementById('outputSeqMax').addEventListener('input', function() {
+                document.getElementById('outputSeqMaxValue').textContent = this.value;
+                window.filterChart.applyFilters();
+            });
+            
+            // 指标筛选
+            document.getElementById('showPrefill').addEventListener('change', function() {
+                window.filterChart.toggleColumn(8, this.checked);
+            });
+            
+            document.getElementById('showDecode').addEventListener('change', function() {
+                window.filterChart.toggleColumn(9, this.checked);
+            });
+            
+            document.getElementById('showTotal').addEventListener('change', function() {
+                window.filterChart.toggleColumn(10, this.checked);
+            });
+            
+            document.getElementById('showTokens').addEventListener('change', function() {
+                window.filterChart.toggleColumn(11, this.checked);
+            });
+            
+            // 重置筛选按钮
+            document.getElementById('resetFiltersBtn').addEventListener('click', function() {
+                window.filterChart.resetFilters();
+            });
+            
+            // 切换图表显示
+            document.getElementById('toggleChartsBtn').addEventListener('click', function() {
+                const chartsContainer = document.getElementById('chartsContainer');
+                const isVisible = chartsContainer.style.display !== 'none';
+                chartsContainer.style.display = isVisible ? 'none' : 'flex';
+                this.innerHTML = isVisible ? 
+                    '<i class="fas fa-chart-bar"></i> 对比分析' : 
+                    '<i class="fas fa-table"></i> 隐藏图表';
+            });
+            
+            // 导出数据按钮
+            document.getElementById('exportDataBtn').addEventListener('click', function() {
+                window.dataExport.exportToCSV();
+            });
+        }
+        
+        // 初始化DataTable
+        function initializeDataTable() {
+            window.dataTable = $('#dataTable').DataTable({
+                pageLength: 25,
+                lengthMenu: [10, 25, 50, 100],
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/zh.json"
+                }
+            });
+        }
+    </script>
+</body>
+</html>

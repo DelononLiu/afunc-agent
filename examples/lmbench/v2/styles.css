@@ -1,0 +1,188 @@
+/* 主体布局 */
+body {
+    font-size: 0.875rem;
+}
+
+/* 侧边栏 */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+/* 统计卡片 */
+.card {
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-text.display-6 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* 按钮样式 */
+.btn {
+    margin-bottom: 0.5rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* 表格样式 */
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* 表单元素 */
+.form-control,
+.form-select {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.form-label {
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.form-check {
+    margin-bottom: 0.25rem;
+}
+
+.form-check-input {
+    margin-top: 0.25rem;
+}
+
+/* 滑块控件 */
+.form-range {
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+/* 图表容器 */
+#chartsContainer {
+    margin-top: 1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: static;
+        padding-top: 0;
+        height: auto;
+    }
+    
+    .sidebar-sticky {
+        height: auto;
+        overflow-y: visible;
+    }
+    
+    #chartsContainer {
+        flex-direction: column;
+    }
+    
+    #chartsContainer > div {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+/* 紧凑布局 */
+.sidebar-sticky > div {
+    padding: 0.125rem;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-sticky > div > h6 {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+/* 数据表格响应式 */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 导航栏 */
+.navbar-brand {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, .15);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .navbar-toggler {
+    top: .25rem;
+    right: 1rem;
+}
+
+/* 主内容区域 */
+main {
+    padding-top: 1.5rem;
+}
+
+/* 标题 */
+.h2 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* 分隔线 */
+.border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* 工具栏 */
+.btn-toolbar {
+    margin-bottom: 0;
+}
+
+/* 图表画布 */
+canvas {
+    max-width: 100%;
+    height: auto;
+}
