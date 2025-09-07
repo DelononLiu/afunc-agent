@@ -156,59 +156,41 @@
 
         <!-- 右侧主内容区域 -->
         <main class="flex-1 ml-64 p-4 overflow-x-hidden">
-            <!-- 统计信息卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <div class="stat-card hover-shadow">
-                    <div class="text-gray-600 text-sm">平均Prefill耗时(ms)</div>
-                    <div class="stat-value" id="avg-prefill">0.00</div>
-                </div>
-                <div class="stat-card hover-shadow">
-                    <div class="text-gray-600 text-sm">平均Decode耗时(ms)</div>
-                    <div class="stat-value" id="avg-decode">0.00</div>
-                </div>
-                <div class="stat-card hover-shadow">
-                    <div class="text-gray-600 text-sm">平均Token/s</div>
-                    <div class="stat-value" id="avg-tokens">0.00</div>
-                </div>
-            </div>
 
-            <!-- 操作按钮 -->
-            <div class="flex justify-end space-x-2 mb-4">
-                <button
-                    onclick="toggleFrameworkChart()"
-                    class="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded hover-lift">
-                    <i class="fas fa-chart-bar mr-2"></i>框架对比
-                </button>
-                <button
-                    onclick="toggleModelChart()"
-                    class="btn bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded hover-lift">
-                    <i class="fas fa-chart-line mr-2"></i>模型对比
-                </button>
-                <button
-                    onclick="exportData()"
-                    class="btn bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded hover-lift">
-                    <i class="fas fa-download mr-2"></i>导出数据
-                </button>
+            <!-- 操作按钮和搜索框 -->
+            <div class="flex justify-between items-center mb-4">
+                <!-- 搜索框 -->
+                <div class="flex items-center">
+                    <input
+                        type="text"
+                        placeholder="搜索..."
+                        id="search-input"
+                        oninput="searchTable()"
+                        class="border border-blue-300 rounded px-3 py-2 text-sm w-80 bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <!-- 操作按钮 -->
+                <div class="flex space-x-2">
+                    <button
+                        onclick="toggleFrameworkChart()"
+                        class="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded hover-lift">
+                        <i class="fas fa-chart-bar mr-2"></i>框架对比
+                    </button>
+                    <button
+                        onclick="toggleModelChart()"
+                        class="btn bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded hover-lift">
+                        <i class="fas fa-chart-line mr-2"></i>模型对比
+                    </button>
+                    <button
+                        onclick="exportData()"
+                        class="btn bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded hover-lift">
+                        <i class="fas fa-download mr-2"></i>导出数据
+                    </button>
+                </div>
             </div>
 
             <!-- 数据表格 -->
             <div class="bg-white rounded-lg shadow mb-6">
-                <div class="p-4 border-b flex justify-between items-center">
-                    <h2 class="text-lg font-semibold">性能数据</h2>
-                    <div class="flex items-center">
-                        <input
-                            type="text"
-                            placeholder="搜索..."
-                            id="search-input"
-                            oninput="searchTable()"
-                            class="border rounded px-3 py-1 text-sm mr-2">
-                        <button
-                            onclick="searchTable()"
-                            class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded text-sm">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
                 <div id="benchmark-table"></div>
             </div>
 
@@ -360,20 +342,11 @@
                 table.setData(dataHandler.getFilteredBenchmarks());
             }
             
-            // 更新统计信息
-            updateStats();
             
             // 更新图表
             updateCharts();
         }
         
-        // 更新统计信息
-        function updateStats() {
-            const stats = dataHandler.calculateStats();
-            document.getElementById('avg-prefill').textContent = stats.avgPrefillTime.toFixed(2);
-            document.getElementById('avg-decode').textContent = stats.avgDecodeTime.toFixed(2);
-            document.getElementById('avg-tokens').textContent = stats.avgTokensPerSecond.toFixed(2);
-        }
         
         // 搜索表格
         function searchTable() {
