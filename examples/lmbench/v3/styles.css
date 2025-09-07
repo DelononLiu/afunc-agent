@@ -1,268 +1,206 @@
-/* 自定义样式 */
+/* 主体样式 */
 body {
+    background-color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
 }
 
-/* 顶部导航栏 */
-header {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 1000;
+/* 筛选面板紧凑样式 */
+.filter-panel-compact {
+    padding: 0.125rem;
 }
 
-/* 统计信息卡片 */
-.stat-card {
-    transition: all 0.3s ease;
+.filter-section {
+    margin-bottom: 0.25rem;
 }
 
-.stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* 数据表格 */
-#data-table {
-    border-radius: 0.25rem;
+.filter-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
 }
 
 /* 图表容器 */
 .chart-container {
-    position: relative;
     height: 450px;
-    width: 100%;
 }
 
-.chart-canvas {
-    width: 100% !important;
-    height: 100% !important;
-}
-
+/* 响应式设计 */
 @media (max-width: 768px) {
     .chart-container {
         height: 300px;
+    }
+    
+    .sidebar {
+        height: auto;
+        position: relative;
     }
 }
 
 /* 按钮样式 */
 .btn {
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* 筛选面板 */
-.filter-panel {
-    min-height: 100vh;
-    padding: 0.125rem;
-}
-
-/* 固定筛选面板 */
-.fixed-filter-panel {
-    position: fixed;
-    height: calc(100vh - 64px);
-    width: 25%; /* 1/4 width */
-    top: 64px;
-}
-
-/* 筛选器部分 */
-.filter-section {
-    margin-bottom: 0.25rem;
-}
-
-/* 主内容区域 */
-.main-content {
-    padding: 1.5rem;
-}
-
-/* 表格单元格 */
-.tabulator-cell {
-    padding: 0.75rem !important;
-}
-
-/* 滑块样式 */
-.slider {
-    width: 100%;
-    height: 0.5rem;
-    border-radius: 0.25rem;
-    background: #d1d5db;
-    outline: none;
-    -webkit-appearance: none;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
-    background: #3b82f6;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
-    background: #3b82f6;
-    cursor: pointer;
-}
-
-/* 下拉选择框 */
-select {
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #d1d5db;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    outline: 0;
-}
-
-/* 文件输入框 */
-input[type="file"] {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #4b5563;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #d1d5db;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-input[type="file"]:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    outline: 0;
-}
-
-/* 复选框 */
-input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
-    color: #3b82f6;
-    border: 1px solid #d1d5db;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-input[type="checkbox"]:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    outline: 0;
-}
-
-/* 滑块容器 */
-.slider-container {
-    padding: 0.125rem;
-}
-
-/* 搜索框 */
-#tableSearch {
-    width: 200px;
-    border-radius: 0.25rem;
-    border: 1px solid #d1d5db;
-    padding: 0.5rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-#tableSearch:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    outline: 0;
-}
-
-/* 搜索按钮 */
-#searchBtn {
-    transition: all 0.3s ease;
-}
-
-#searchBtn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* 响应式设计 */
-@media (max-width: 1024px) {
-    .filter-panel {
-        width: 30%;
-    }
-    
-    .main-content {
-        width: 70%;
-    }
-}
-
-@media (max-width: 768px) {
-    .filter-panel {
-        width: 100%;
-        min-height: auto;
-    }
-    
-    .main-content {
-        width: 100%;
-    }
-    
-    .stat-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .stat-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .filter-panel {
-        padding: 0.5rem;
-    }
-    
-    .main-content {
-        padding: 1rem;
-    }
-}
-
-/* 左侧筛选面板紧凑布局 */
-.filter-panel-compact {
-    padding: 0.5rem;
-}
-
-.filter-panel-compact .filter-section {
     margin-bottom: 0.5rem;
 }
 
-.filter-panel-compact .filter-title {
+/* 统计值样式 */
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* 悬停效果 */
+.hover-lift {
+    transition: all 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 表格容器 */
+#benchmark-table {
+    height: 500px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* 紧凑输入框 */
+.compact-input {
+    padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
-    margin-bottom: 0.25rem;
 }
 
-.filter-panel-compact .filter-input {
-    padding: 0.25rem;
+/* 表格样式优化 */
+.tabulator {
+    border: none;
     font-size: 0.875rem;
 }
 
-.filter-panel-compact .filter-button {
-    padding: 0.25rem;
+.tabulator .tabulator-header {
+    background-color: #f1f5f9;
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 600;
+}
+
+.tabulator .tabulator-row:hover {
+    background-color: #f8fafc;
+}
+
+.tabulator .tabulator-row.tabulator-selected {
+    background-color: #dbeafe;
+}
+
+/* 统计卡片美化 */
+.stat-card {
+    background: linear-gradient(135deg, #f0f4f8, #e2e8f0);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4338ca;
+}
+
+/* 按钮美化 */
+.btn {
+    margin-bottom: 0.5rem;
+    border: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 筛选面板美化 */
+.filter-panel-compact {
+    padding: 0.5rem;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-right: 1px solid #e2e8f0;
+}
+
+.filter-section {
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    background-color: white;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.filter-title {
     font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #4338ca;
 }
 
-.filter-panel-compact .filter-checkbox-label {
-    font-size: 0.875rem;
+/* 图表容器美化 */
+.chart-container {
+    height: 450px;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.filter-panel-compact .filter-slider-container {
-    padding: 0.125rem;
+/* 顶部导航栏美化 */
+.top-navbar {
+    height: 64px;
+    background: linear-gradient(135deg, #4338ca, #6366f1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.filter-panel-compact .filter-slider-value {
-    font-size: 0.75rem;
+.top-navbar h1 {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计优化 */
+@media (max-width: 768px) {
+    .chart-container {
+        height: 300px;
+        padding: 0.75rem;
+    }
+    
+    .sidebar {
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .top-navbar {
+        height: 56px;
+    }
+}
+
+/* 框架颜色区分 */
+.framework-tensorrt {
+    background-color: #e3f2fd;
+}
+
+.framework-vllm {
+    background-color: #f1f8e9;
+}
+
+/* 侧边栏 */
+.sidebar {
+    top: 64px;
 }
